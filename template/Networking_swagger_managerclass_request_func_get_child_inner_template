@@ -1,0 +1,4 @@
+
+     public GenericObjectRequest [FUNC_NAME](final NetworkResponseListener<[RESULT_MODEL_NAME], ServiceErrorModel> listener) {
+         return manager.get("[QUERY_PATH]", listener);
+     }
