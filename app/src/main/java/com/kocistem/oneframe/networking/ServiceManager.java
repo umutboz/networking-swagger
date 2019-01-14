@@ -1,11 +1,11 @@
 //
 //
 //  Networking-Swagger Code Generate Creater 1.0
-//  [SERVICE_NAME]ServiceManager.java
+//  [CLASSNAME]ServiceManager.java
 //  Copyright © 2019 OneFrame Mobile - Koçsistem All rights reserved.
 //
 
-package [PACKAGE_NAME];
+package com.kocistem.oneframe;
 
 import com.oneframe.android.networking.NetworkConfig;
 import com.oneframe.android.networking.NetworkManager;
@@ -16,13 +16,13 @@ import java.util.List;
 
 {{model_package}}
 
-public class [SERVICE_NAME]ServiceManager {
+public class WorkplaceServiceManager {
 
     private static final String RESULT_TAG = "[JSON_KEY]";
 
     private NetworkManager manager;
 
-    public [SERVICE_NAME]ServiceManager() {
+    public WorkplaceServiceManager() {
         manager = NetworkingFactory
                 .create()
                 .setJsonKey(RESULT_TAG);
