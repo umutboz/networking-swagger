@@ -19,7 +19,7 @@ for index in range(0, len(lines)):
         interval = Interval()
         interval.start = index + 1
         continue
-    if(line == '  );\n'):
+    if(line.endswith(');\n')):
         interval.end = index + 1
         intervals.append(interval)
 
