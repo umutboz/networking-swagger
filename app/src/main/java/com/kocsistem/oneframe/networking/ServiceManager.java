@@ -5,7 +5,7 @@
 //  Copyright © 2019 OneFrame Mobile - Koçsistem All rights reserved.
 //
 
-package com.kocistem.oneframe;
+package com.kocsistem.oneframe;
 
 import com.oneframe.android.networking.NetworkConfig;
 import com.oneframe.android.networking.NetworkManager;
@@ -29,7 +29,7 @@ public class WorkplaceServiceManager {
                 //.setNetworkLearning(new AdvancedNetworkLearning());
 
         NetworkConfig.getInstance().deleteAllHeaders();
-        NetworkConfig.getInstance().setURL("[URL]");
+        NetworkConfig.getInstance().setURL("http://178.211.54.214:5000/");
         //NetworkConfig.getInstance().setBodyContentType("application/json; charset=utf-8");
 
         /*

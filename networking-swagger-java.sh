@@ -284,8 +284,8 @@ def createParentModules():
 
 
 #coding start
-#neteorking-swagger -url -package -serviceName -resultJsonKey
-if len(sys.argv) >= 3:
+#networking-swagger -url -package -serviceName -resultJsonKey
+if len(sys.argv) >= 4:
     param_url = str(sys.argv[1])
     param_package = str(sys.argv[2])
     param_serviceName = str(sys.argv[3])
@@ -305,7 +305,16 @@ if len(sys.argv) >= 3:
     replacement = { "[SERVICE_NAME]" : param_serviceName ,"[PACKAGE_NAME]" : param_package ,"[URL]" : swagger_root_http_url }
     #creatae networking-swagger-java folders
     createFolder()
+    swagger_codegen_homebrew_cmd = 'swagger-codegen generate -i ' + param_url + ' -l java -Dmodels'
+    os.system(swagger_codegen_homebrew_cmd)
     createParentModules()
+    pwd = '/Users/umut/Desktop/Architecture/Android Libraries/networking/networking-swagger/src/main/java/io/swagger/client/model/WebApiResponseUserLoginResultDto.java'
+    if not os.path.exists('/Users/umut/Desktop/Architecture/Android Libraries/networking/networking-swagger/src/main/java/io/swagger/client/model/CarePlansDto.java'):
+        print 'heello from end'
+        showErrorMessages(MESSAGE.ERROR,"heello from end")
+else:
+    showErrorMessages(MESSAGE.ERROR,"networking-swagger -url -package -serviceName")
+    showErrorMessages(MESSAGE.ERROR,"min 3 arguments in commands")
     '''
     replacement = { "[MODEL]" : param_package , "[modelLowerCase]" : param_package.lower()}
 
