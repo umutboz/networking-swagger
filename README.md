@@ -1,12 +1,12 @@
 # networking-swagger
 
 #1.0.0
-#networking-swagger-java -url -package -serviceName -resultJsonKey
+*networking-swagger-java -url -package -serviceName -resultJsonKey*
 
-networking-swagger-java
+*networking-swagger-java
 http://178.211.54.214:5000/swagger/v1/swagger.json
 com.kocsistem.oneframe
-Workplace
+Workplace*
 
 
 #Output
@@ -47,5 +47,5 @@ public class WorkplaceServiceManager {
         */
     }
 
-  
+
 }
