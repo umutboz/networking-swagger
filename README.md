@@ -1,7 +1,8 @@
 # networking-swagger-java
 @umutboz :electric_plug: Networking JAVA Code Gen Tool :shipit:
-#1.0.0
-*networking-swagger-java -url -package -serviceName -resultJsonKey*
+\#1.0.0
+
+\*networking-swagger-java -url -package -serviceName -resultJsonKey*
 
 *networking-swagger-java
 http://178.211.54.214:5000/swagger/v1/swagger.json
