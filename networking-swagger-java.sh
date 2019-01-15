@@ -10,7 +10,7 @@ import urllib2
 import ssl
 
 #1.0.0
-#neteorking-swagger-java -url -package -serviceName -resultJsonKey
+#networking-swagger-java -url -package -serviceName -resultJsonKey
 
 def constant(f):
     def fset(self, value):

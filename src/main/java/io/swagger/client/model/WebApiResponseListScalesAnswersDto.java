@@ -28,7 +28,7 @@ import java.util.List;
  * WebApiResponseListScalesAnswersDto
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2019-01-15T00:52:54.056+03:00[Europe/Istanbul]")public class WebApiResponseListScalesAnswersDto {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2019-01-15T10:03:33.818+03:00[Europe/Istanbul]")public class WebApiResponseListScalesAnswersDto {
 
   @SerializedName("resultData")
   private List<ScalesAnswersDto> resultData = null;

@@ -1,7 +1,7 @@
 //
 //
 //  Networking-Swagger Code Generate Creater 1.0
-//  [CLASSNAME]ServiceManager.java
+//  WorkplaceServiceManager.java
 //  Copyright © 2019 OneFrame Mobile - Koçsistem All rights reserved.
 //
 

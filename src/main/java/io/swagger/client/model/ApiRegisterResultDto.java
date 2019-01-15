@@ -26,7 +26,7 @@ import java.util.UUID;
  * ApiRegisterResultDto
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2019-01-15T00:52:54.056+03:00[Europe/Istanbul]")public class ApiRegisterResultDto {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2019-01-15T10:03:33.818+03:00[Europe/Istanbul]")public class ApiRegisterResultDto {
 
   @SerializedName("apiKey")
   private UUID apiKey = null;
