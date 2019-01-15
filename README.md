@@ -1,5 +1,5 @@
-# networking-swagger
-
+# networking-swagger-java
+@umutboz :electric_plug: Networking JAVA Code Gen Tool :shipit:
 #1.0.0
 *networking-swagger-java -url -package -serviceName -resultJsonKey*
 
@@ -9,8 +9,8 @@ com.kocsistem.oneframe
 Workplace*
 
 
-#Output
-
+#:computer:Output
+```java
 package com.kocsistem.oneframe;
 
 import com.oneframe.android.networking.NetworkConfig;
@@ -49,3 +49,4 @@ public class WorkplaceServiceManager {
 
 
 }
+```
