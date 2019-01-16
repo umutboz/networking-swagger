@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * WebApiResponseListFsoAnswersDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T02:53:50.763+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T12:09:11.579+03:00")
 public class WebApiResponseListFsoAnswersDto {
   @SerializedName("resultData")
   private List<FsoAnswersDto> resultData = null;

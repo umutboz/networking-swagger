@@ -81,22 +81,6 @@ manager_file_content = ''
 SWAGGER_CLIENT_FILEPATH = 'src/main/java/io/swagger/client/'
 
 
-VIEW = 'View'
-VIEW_TEMPLATE = "Viper_view_template"
-view_file_content = ''
-view_filename = 'View.swift'
-
-
-INTERACTOR = 'Interactor'
-INTERACTOR_TEMPLATE = "Viper_interactor_template"
-interactor_file_content = ''
-interactor_filename = 'Interactor.swift'
-
-WIREFRAME = 'WireFrame'
-WIREFRAME_TEMPLATE = "Viper_wireframe_template"
-wireframe_file_content = ''
-wireframe_filename = 'WireFrame.swift'
-
 
 #CHILD
 CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE = "Networking_swagger_import_package_inner_template"
@@ -119,10 +103,10 @@ sub_module_type = '-s'
 ##CURRENT_DEV_ENV LOCAL OR ONLINE(Github)
 CURRENT_DEV_ENV = DEV_ENV.ONLINE
 SWIFT = ".swift"
-FOR_CHILD_INNER = "//{FOR SUB_IN}"
-FOR_CHILD = "//{FOR SUB}"
+model_package = "//{{model_package}}"
+request_func = "//{{request_func}}"
 def initVariables():
-    global replacement, NETWORKNG_SWAGGER_MANAGER_TEMPLATE,CHILD_MANAGER_ADD_HEADER_TEMPLATE, CHILD_MANAGER_GET_FUNC_TEMPLATE,CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE,CHILD_MANAGER_POST_FUNC_TEMPLATE, CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE,CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE,swagger_root_http_url
+    global replacement,child_replacement, NETWORKNG_SWAGGER_MANAGER_TEMPLATE,CHILD_MANAGER_ADD_HEADER_TEMPLATE, CHILD_MANAGER_GET_FUNC_TEMPLATE,CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE,CHILD_MANAGER_POST_FUNC_TEMPLATE, CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE,CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE,swagger_root_http_url
     online_path = "https://raw.githubusercontent.com/umutboz/networking-swagger/master/template/"
     if intern(DEV_ENV.ONLINE) is intern(CURRENT_DEV_ENV):
         NETWORKNG_SWAGGER_MANAGER_TEMPLATE = ONLINE_FOLDER + NETWORKNG_SWAGGER_MANAGER_TEMPLATE
@@ -216,6 +200,7 @@ def getFileContent(file):
 def replaceAndCreateCodingContent(template_file):
     print template_file
     temp_file_content = multiple_replace(getFileContent(template_file),  child_replacement)
+    print "content " + template_file
     return temp_file_content
 
 def insertOtherString (source_str, insert_str, pos):
@@ -230,25 +215,25 @@ def childInsertMember(childInnerTemplate,insertingModule, subType):
 
     generic_child_inner_template_content = replaceAndCreateCodingContent(childInnerTemplate)
     data = open(templateDataPath ,"r").read(20000)
-
+    #import package
     if subType == 0:
-        subTypeString = FOR_CHILD_INNER
+        subTypeString = model_package
     else:
-        subTypeString = FOR_CHILD
+        subTypeString = request_func
 
     child_inner_index = str(data.strip()).index(subTypeString) + len(subTypeString) + 1
-    if subType == 0:
-        fileContent =  insertOtherString(str(data.strip()),CODING.SPACE_AFTER + generic_child_inner_template_content +
+    if subType == 0: #CODING.SPACE_AFTER +
+        fileContent =  insertOtherString(str(data.strip()), generic_child_inner_template_content +
     CODING.NEWLINE,child_inner_index)
     else:
-        fileContent =  insertOtherString(str(data.strip()),CODING.NEWLINE+CODING.NEWLINE+CODING.SPACE_AFTER + generic_child_inner_template_content +
+        fileContent =  insertOtherString(str(data.strip()),generic_child_inner_template_content +
     CODING.NEWLINE,child_inner_index)
     appendFile(fileName=templateDataPath,content=fileContent)
 
 
 
 def removeChildContent(childInnerTemplate,removingModule):
-    templateDataPath =  os.getcwd() + CODING.SLASH  + MODULES + CODING.SLASH + param_package + CODING.SLASH  + removingModule + CODING.SLASH  + param_package + removingModule + SWIFT
+    templateDataPath =  os.getcwd() + JAVA_ANDROID_ROOT_PATH + package_path + CODING.SLASH  + removingModule
     generic_child_inner_template_content = replaceAndCreateCodingContent(childInnerTemplate)
     #print generic_child_inner_template_content
     data = open(templateDataPath ,"r").read(20000)
@@ -290,6 +275,7 @@ def createParentModules():
 	#NETWORKING SWAGGER MANAGER operations END
 
 def runSwaggerModelOperations():
+    global child_replacement
     #print os.getcwd() + CODING.SLASH + SWAGGER_CLIENT_FILEPATH + "model/"
     oldModelPath = os.getcwd() + CODING.SLASH  + SWAGGER_CLIENT_FILEPATH + "model/"
     for model in getModels(oldModelPath, param_package + CODING.DOT + MODULES + CODING.DOT  + MODELS):
@@ -349,7 +335,7 @@ if len(sys.argv) >= 4:
     os.system(swagger_codegen_homebrew_cmd)
 
     createParentModules()
-
+    child_replacement = { "[PACKAGE_NAME]" : param_package , "[MODEL_NAME]" : "models"}
     #swagger model replace package and move MODELS
     runSwaggerModelOperations()
 

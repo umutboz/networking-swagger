@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * WebApiResponseUserCreditTransactionsDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T02:53:50.763+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T12:09:11.579+03:00")
 public class WebApiResponseUserCreditTransactionsDto {
   @SerializedName("resultData")
   private UserCreditTransactionsDto resultData = null;
