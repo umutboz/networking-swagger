@@ -10,7 +10,7 @@ http://178.211.54.214:5000/swagger/v1/swagger.json
 com.kocsistem.oneframe
 Workplace*
 
-
+#
 #:computer:Output
 ```java
 package com.kocsistem.oneframe;
