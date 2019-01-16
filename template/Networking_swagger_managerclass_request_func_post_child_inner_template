@@ -1,4 +1,4 @@
 
     public GenericObjectRequest [FUNC_NAME]([REQUEST_MODEL_NAME] model, final NetworkResponseListener<[RESULT_MODEL_NAME], ServiceErrorModel> listener) {
-      return manager.post("[QUERY_PATH]", model, listener);
+      return manager.post([QUERY_PATH], model, listener);
     }

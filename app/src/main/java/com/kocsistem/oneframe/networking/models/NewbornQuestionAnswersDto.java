@@ -28,7 +28,7 @@ import org.threeten.bp.OffsetDateTime;
 /**
  * NewbornQuestionAnswersDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T22:07:52.192+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-17T00:46:55.050+03:00")
 public class NewbornQuestionAnswersDto {
   @SerializedName("id")
   private Long id = null;

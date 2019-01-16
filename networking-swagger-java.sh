@@ -158,6 +158,8 @@ class Function:
            querypath += " + \"?\" + "
            for query in queries:
                querypath += "\"" + query.key + "=\" + " + query.name
+               if queries.index(query) != len(queries) - 1:
+                   querypath += " + \"&\" + "
 
        del paths, queries
 
@@ -303,6 +305,9 @@ manager_file_content = ''
 SWAGGER_CLIENT_FILEPATH = 'src/main/java/io/swagger/client/'
 
 
+last_request_cache_key = ""
+last_request_cache_content = ""
+
 
 #CHILD
 CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE = "Networking_swagger_import_package_inner_template"
@@ -328,7 +333,7 @@ SWIFT = ".swift"
 model_package = "//{{model_package}}"
 request_func = "//{{request_func}}"
 def initVariables():
-    global replacement,child_replacement, NETWORKNG_SWAGGER_MANAGER_TEMPLATE,CHILD_MANAGER_ADD_HEADER_TEMPLATE, CHILD_MANAGER_GET_FUNC_TEMPLATE,CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE,CHILD_MANAGER_POST_FUNC_TEMPLATE, CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE,CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE,swagger_root_http_url
+    global replacement,child_replacement, last_request_cache_key, last_request_cache_content ,NETWORKNG_SWAGGER_MANAGER_TEMPLATE,CHILD_MANAGER_ADD_HEADER_TEMPLATE, CHILD_MANAGER_GET_FUNC_TEMPLATE,CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE,CHILD_MANAGER_POST_FUNC_TEMPLATE, CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE,CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE,swagger_root_http_url
     online_path = "https://raw.githubusercontent.com/umutboz/networking-swagger/master/template/"
     if intern(DEV_ENV.ONLINE) is intern(CURRENT_DEV_ENV):
         NETWORKNG_SWAGGER_MANAGER_TEMPLATE = ONLINE_FOLDER + NETWORKNG_SWAGGER_MANAGER_TEMPLATE
@@ -400,24 +405,30 @@ def appendFile(fileName,content,isTruncate=False):
         f.close()
 
 def getFileContent(file):
-	fileContent = ""
-	if intern(DEV_ENV.LOCAL) is intern(CURRENT_DEV_ENV):
-		data = open(os.getcwd() + CODING.SLASH  + file,"r").read(20000) #opens file with name of "test.txt"
-		fileContent = data.strip()
-		return fileContent
-	else:
-		try:
-			gcontext = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
-			data = urllib2.urlopen(file, context=gcontext).read(20000)
-			#data = data.split("\n")
-			fileContent=data.strip()
-		except urllib2.HTTPError as e:
-			print('HTTPError = ' + str(e.code))
-		except urllib2.URLError as e:
-			print('URLError = ' + str(e.reason))
-		except Exception as e:
-			print('generic exception: ' + str(e))
-		return fileContent
+    global last_request_cache_key, last_request_cache_content
+    fileContent = ""
+    if intern(DEV_ENV.LOCAL) is intern(CURRENT_DEV_ENV):
+        data = open(os.getcwd() + CODING.SLASH  + file,"r").read(20000) #opens file with name of "test.txt"
+        fileContent = data.strip()
+        return fileContent
+    else:
+        try:
+            if intern(last_request_cache_key) is intern(file):
+                print "cached data : " + file
+                return last_request_cache_content
+            gcontext = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
+            data = urllib2.urlopen(file, context=gcontext).read(20000)
+            fileContent=data.strip()
+            last_request_cache_key = file
+            last_request_cache_content = fileContent
+        except urllib2.HTTPError as e:
+            print('HTTPError = ' + str(e.code))
+        except urllib2.URLError as e:
+            print('URLError = ' + str(e.reason))
+        except Exception as e:
+            print('generic exception: ' + str(e))
+        return fileContent
+
 
 def replaceAndCreateCodingContent(template_file):
     print template_file
@@ -437,6 +448,7 @@ def childInsertMember(childInnerTemplate,insertingModule, subType):
 
     generic_child_inner_template_content = replaceAndCreateCodingContent(childInnerTemplate)
     data = open(templateDataPath ,"r").read(20000)
+
     #import package
     if subType == 0:
         subTypeString = model_package
@@ -533,7 +545,7 @@ def replaceModelPackage(path, packageName, subList):
 
 def runRetrofitParser():
     global child_replacement
-    path = os.getcwd() +'/src/main/java/io/swagger/client/api/DiagnosisApi.java'
+    path = os.getcwd() +'/src/main/java/io/swagger/client/api/FsoApi.java'
 
     with open(path) as fp:
         lines = fp.readlines()
@@ -543,37 +555,42 @@ def runRetrofitParser():
 
         hasInlineParam = False
         funcInlineParam = ""
-        inlineParamCount = 0
+        funcBodyInlineParam = ""
+
         if len(func.parameters) > 0:
             for param in func.parameters:
                 print param.name + " " + param.clazz + " type : " + param.annotation
                 if param.annotation == "Query" or param.annotation == "Path":
                     hasInlineParam = True
-                    if inlineParamCount == 0:
-                        funcInlineParam = param.clazz + " " + param.name
-                        inlineParamCount += 1
-                    else:
-                        funcInlineParam += "," + param.clazz + " " + param.name
-                        inlineParamCount += 1
+                    funcInlineParam += "," + param.clazz + " " + param.name
+                if param.annotation == "Body":
+                    funcBodyInlineParam = param.clazz
+                    print param.name + " " + param.clazz + " type : " + param.annotation
+                    print func.bodyparameter
 
-        if hasInlineParam == True:
-            child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam }
-        else:
-            child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : "" }
-
-
-        print func.name + " " + func.api.method + " " + func.api.address + " " + func.response + " " + func.querypath()
+        #print func.name + " " + func.api.method + " " + func.api.address + " " + func.response + " " + func.querypath()
         #GET FUNC
         if intern(func.api.method) is intern("GET"):
+            if hasInlineParam == True:
+                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam }
+            else:
+                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : "" }
             childInsertMember(childInnerTemplate=CHILD_MANAGER_GET_FUNC_TEMPLATE,insertingModule=manager_filename, subType=1)
-        #else:
-
+        elif intern(func.api.method) is intern("POST"):
+            if hasInlineParam == True:
+                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam , "[REQUEST_MODEL_NAME]" : funcBodyInlineParam}
+            else:
+                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : "", "[REQUEST_MODEL_NAME]" : funcBodyInlineParam}
+            childInsertMember(childInnerTemplate=CHILD_MANAGER_POST_FUNC_TEMPLATE,insertingModule=manager_filename, subType=1)
             #print func.name + " " + func.api.method + " " + func.api.address + " " + func.response + " " + func.querypath()
 
     #print len(clazz.functions)
     '''
     public GenericObjectRequest [FUNC_NAME](final NetworkResponseListener<[RESULT_MODEL_NAME], ServiceErrorModel> listener) {
          return manager.get("[QUERY_PATH]", listener);
+     }
+       public GenericObjectRequest [FUNC_NAME]([REQUEST_MODEL_NAME] model, final NetworkResponseListener<[RESULT_MODEL_NAME], ServiceErrorModel> listener) {
+       return manager.post("[QUERY_PATH]", model, listener);
      }
     '''
     #print clazz.functions[0].querypath()
@@ -601,7 +618,7 @@ if len(sys.argv) >= 4:
     replacement = { "[SERVICE_NAME]" : param_serviceName ,"[PACKAGE_NAME]" : param_package ,"[URL]" : swagger_root_http_url }
     #creatae networking-swagger-java folders
     createFolder()
-    
+
     #swagger-codegen generate -i http://178.211.54.214:5000/swagger/v1/swagger.json -l java -Dmodels,apis --library retrofit2
     swagger_codegen_homebrew_cmd = 'swagger-codegen generate -i ' + param_url + ' -l java -Dmodels,apis --library retrofit2'
     os.system(swagger_codegen_homebrew_cmd)

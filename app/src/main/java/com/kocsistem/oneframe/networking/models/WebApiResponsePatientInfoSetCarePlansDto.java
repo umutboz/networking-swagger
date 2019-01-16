@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * WebApiResponsePatientInfoSetCarePlansDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T22:07:52.192+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-17T00:46:55.050+03:00")
 public class WebApiResponsePatientInfoSetCarePlansDto {
   @SerializedName("resultData")
   private PatientInfoSetCarePlansDto resultData = null;

@@ -95,13 +95,19 @@ public class WorkplaceServiceManager {
     }
 
     //{{request_func}}
-public GenericObjectRequest apiDiagnosisGetCarePlansListGet(final NetworkResponseListener<WebApiResponseListCarePlansDto, ServiceErrorModel> listener) {
-         return manager.get(""api/Diagnosis/GetCarePlansList"", listener);
+public GenericObjectRequest apiFsoSetFsoQuestionAnswersPost(List<FsoQuestionAnswersDto> model, final NetworkResponseListener<WebApiResponseBoolean, ServiceErrorModel> listener) {
+      return manager.post(""api/Fso/SetFsoQuestionAnswers"", model, listener);
+    }
+public GenericObjectRequest apiFsoGetFsoQuestionAnswersListGet(final NetworkResponseListener<WebApiResponseListFsoQuestionAnswersDto, ServiceErrorModel> listener) {
+         return manager.get("api/Fso/GetFsoQuestionAnswersList", listener);
      }
-public GenericObjectRequest apiDiagnosisGetCarePlanByIdGet(final NetworkResponseListener<WebApiResponseCarePlansDto, ServiceErrorModel> listener) {
-         return manager.get(""api/Diagnosis/GetCarePlanById" + "?" + "id=" + id", listener);
+public GenericObjectRequest apiFsoGetFsoQuestionAnswersByPatientInformationIdGet(final NetworkResponseListener<WebApiResponseListFsoQuestionAnswersDto, ServiceErrorModel> listener,Long id) {
+         return manager.get("api/Fso/GetFsoQuestionAnswersByPatientInformationId" + "?" + "id=" + id, listener);
      }
-public GenericObjectRequest apiDiagnosisGetCarePlanByDiagnosisNameGet(final NetworkResponseListener<WebApiResponseCarePlansDto, ServiceErrorModel> listener) {
-         return manager.get(""api/Diagnosis/GetCarePlanByDiagnosisName" + "?" + "name=" + name", listener);
+public GenericObjectRequest apiFsoGetFsoListGet(final NetworkResponseListener<WebApiResponseListFsoMainDto, ServiceErrorModel> listener) {
+         return manager.get("api/Fso/GetFsoList", listener);
+     }
+public GenericObjectRequest apiFsoGetFsoAnswersListGet(final NetworkResponseListener<WebApiResponseListFsoAnswersDto, ServiceErrorModel> listener) {
+         return manager.get("api/Fso/GetFsoAnswersList", listener);
      }
 }
