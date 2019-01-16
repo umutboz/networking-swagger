@@ -199,7 +199,7 @@ class Function:
 
 class Clazz:
     name = None
-    functions = []
+    functions = None
 
     def __init__(self):
         pass
@@ -414,7 +414,7 @@ def getFileContent(file):
     else:
         try:
             if intern(last_request_cache_key) is intern(file):
-                print "cached data : " + file
+                #print "cached data : " + file
                 return last_request_cache_content
             gcontext = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
             data = urllib2.urlopen(file, context=gcontext).read(20000)
@@ -431,9 +431,9 @@ def getFileContent(file):
 
 
 def replaceAndCreateCodingContent(template_file):
-    print template_file
+    #print template_file
     temp_file_content = multiple_replace(getFileContent(template_file),  child_replacement)
-    print "content " + template_file
+    #print "content " + template_file
     return temp_file_content
 
 def insertOtherString (source_str, insert_str, pos):
@@ -441,7 +441,7 @@ def insertOtherString (source_str, insert_str, pos):
 
 def childInsertMember(childInnerTemplate,insertingModule, subType):
     templateDataPath =  os.getcwd() + JAVA_ANDROID_ROOT_PATH + package_path + CODING.SLASH  + insertingModule
-    print templateDataPath
+    #print templateDataPath
 
     #TODO REMOVE
     removeChildContent(childInnerTemplate = childInnerTemplate, removingModule = insertingModule)
@@ -501,10 +501,10 @@ def createParentModules():
 	showErrorMessages(MESSAGE.INFO,manager_filename)
 	#model manager replacement
 	manager_file_content =  multiple_replace(getFileContent(NETWORKNG_SWAGGER_MANAGER_TEMPLATE),  replacement)
-	print manager_file_content
+	#print manager_file_content
 	#manager file create
 	manager_file_path = root_path + CODING.SLASH + manager_filename
-	print manager_file_path
+	#print manager_file_path
 	createFile(manager_file_path,manager_file_content)
 	#NETWORKING SWAGGER MANAGER operations END
 
@@ -544,46 +544,18 @@ def replaceModelPackage(path, packageName, subList):
             file.writelines(lineDatas)
 
 def runRetrofitParser():
-    global child_replacement
-    path = os.getcwd() +'/src/main/java/io/swagger/client/api/FsoApi.java'
+    generateApiFuncCount = 0
+    oldApiPath = os.getcwd() + CODING.SLASH  + SWAGGER_CLIENT_FILEPATH + "api/"
+    subList = os.listdir(oldApiPath)
+    for apiFile in subList:
+        apiFilePath = oldApiPath + apiFile
 
-    with open(path) as fp:
-        lines = fp.readlines()
+        with open(apiFilePath) as fp:
+            lines = fp.readlines()
 
-    clazz = Clazz.parse(lines)
-    for func in clazz.functions:
-
-        hasInlineParam = False
-        funcInlineParam = ""
-        funcBodyInlineParam = ""
-
-        if len(func.parameters) > 0:
-            for param in func.parameters:
-                print param.name + " " + param.clazz + " type : " + param.annotation
-                if param.annotation == "Query" or param.annotation == "Path":
-                    hasInlineParam = True
-                    funcInlineParam += "," + param.clazz + " " + param.name
-                if param.annotation == "Body":
-                    funcBodyInlineParam = param.clazz
-                    print param.name + " " + param.clazz + " type : " + param.annotation
-                    print func.bodyparameter
-
-        #print func.name + " " + func.api.method + " " + func.api.address + " " + func.response + " " + func.querypath()
-        #GET FUNC
-        if intern(func.api.method) is intern("GET"):
-            if hasInlineParam == True:
-                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam }
-            else:
-                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : "" }
-            childInsertMember(childInnerTemplate=CHILD_MANAGER_GET_FUNC_TEMPLATE,insertingModule=manager_filename, subType=1)
-        elif intern(func.api.method) is intern("POST"):
-            if hasInlineParam == True:
-                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam , "[REQUEST_MODEL_NAME]" : funcBodyInlineParam}
-            else:
-                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : "", "[REQUEST_MODEL_NAME]" : funcBodyInlineParam}
-            childInsertMember(childInnerTemplate=CHILD_MANAGER_POST_FUNC_TEMPLATE,insertingModule=manager_filename, subType=1)
-            #print func.name + " " + func.api.method + " " + func.api.address + " " + func.response + " " + func.querypath()
-
+            clazz = Clazz.parse(lines)
+            showErrorMessages(MESSAGE.INFO,str(len(clazz.functions)) + str(clazz.name) + " api func generating...")
+            generateApiFuncCount += generateNetworkingFunc(clazz.functions)
     #print len(clazz.functions)
     '''
     public GenericObjectRequest [FUNC_NAME](final NetworkResponseListener<[RESULT_MODEL_NAME], ServiceErrorModel> listener) {
@@ -594,8 +566,50 @@ def runRetrofitParser():
      }
     '''
     #print clazz.functions[0].querypath()
-
+    showErrorMessages(MESSAGE.INFO,str(generateApiFuncCount) + " api func generated")
+    shutil.rmtree(oldApiPath)
+    shutil.rmtree(os.getcwd() + CODING.SLASH  + "src/main/java/io/" )
     del lines
+
+
+def generateNetworkingFunc(Functions):
+    global child_replacement
+    generateApiFuncCount = 0
+    for func in Functions:
+        showErrorMessages(MESSAGE.INFO,  func.name + " api func generating...")
+        hasInlineParam = False
+        funcInlineParam = ""
+        funcBodyInlineParam = ""
+        if len(func.parameters) > 0:
+            for param in func.parameters:
+                #print param.name + " " + param.clazz + " type : " + param.annotation
+                if param.annotation == "Query" or param.annotation == "Path":
+                    hasInlineParam = True
+                    funcInlineParam += "," + param.clazz + " " + param.name
+                if param.annotation == "Body":
+                    funcBodyInlineParam = param.clazz
+            #print param.name + " " + param.clazz + " type : " + param.annotation
+            #print func.bodyparameter
+
+#print func.name + " " + func.api.method + " " + func.api.address + " " + func.response + " " + func.querypath()
+#GET FUNC
+        if intern(func.api.method) is intern("GET"):
+            #generateApiFuncCount += 1
+            if hasInlineParam == True:
+                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam }
+            else:
+                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : "" }
+            childInsertMember(childInnerTemplate=CHILD_MANAGER_GET_FUNC_TEMPLATE,insertingModule=manager_filename, subType=1)
+            generateApiFuncCount = generateApiFuncCount + 1
+        elif intern(func.api.method) is intern("POST"):
+            #generateApiFuncCount += 1
+            if hasInlineParam == True:
+                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam , "[REQUEST_MODEL_NAME]" : funcBodyInlineParam}
+            else:
+                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : "", "[REQUEST_MODEL_NAME]" : funcBodyInlineParam}
+            childInsertMember(childInnerTemplate=CHILD_MANAGER_POST_FUNC_TEMPLATE,insertingModule=manager_filename, subType=1)
+            generateApiFuncCount = generateApiFuncCount + 1
+    return generateApiFuncCount
 #coding start
 #networking-swagger -url -package -serviceName -resultJsonKey
 if len(sys.argv) >= 4:
