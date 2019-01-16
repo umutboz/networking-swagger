@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * WebApiResponseParamsDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-17T00:46:55.050+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-17T00:48:19.920+03:00")
 public class WebApiResponseParamsDto {
   @SerializedName("resultData")
   private ParamsDto resultData = null;

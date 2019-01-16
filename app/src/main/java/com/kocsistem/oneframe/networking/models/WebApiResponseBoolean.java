@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * WebApiResponseBoolean
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-17T00:46:55.050+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-17T00:48:19.920+03:00")
 public class WebApiResponseBoolean {
   @SerializedName("resultData")
   private Boolean resultData = null;
