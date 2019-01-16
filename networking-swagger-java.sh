@@ -540,7 +540,29 @@ def runRetrofitParser():
 
     clazz = Clazz.parse(lines)
     for func in clazz.functions:
-        child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() }
+
+        hasInlineParam = False
+        funcInlineParam = ""
+        inlineParamCount = 0
+        if len(func.parameters) > 0:
+            for param in func.parameters:
+                print param.name + " " + param.clazz + " type : " + param.annotation
+                if param.annotation == "Query" or param.annotation == "Path":
+                    hasInlineParam = True
+                    if inlineParamCount == 0:
+                        funcInlineParam = param.clazz + " " + param.name
+                        inlineParamCount += 1
+                    else:
+                        funcInlineParam += "," + param.clazz + " " + param.name
+                        inlineParamCount += 1
+
+        if hasInlineParam == True:
+            child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam }
+        else:
+            child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : "" }
+
+
+        print func.name + " " + func.api.method + " " + func.api.address + " " + func.response + " " + func.querypath()
         #GET FUNC
         if intern(func.api.method) is intern("GET"):
             childInsertMember(childInnerTemplate=CHILD_MANAGER_GET_FUNC_TEMPLATE,insertingModule=manager_filename, subType=1)
@@ -579,6 +601,7 @@ if len(sys.argv) >= 4:
     replacement = { "[SERVICE_NAME]" : param_serviceName ,"[PACKAGE_NAME]" : param_package ,"[URL]" : swagger_root_http_url }
     #creatae networking-swagger-java folders
     createFolder()
+    
     #swagger-codegen generate -i http://178.211.54.214:5000/swagger/v1/swagger.json -l java -Dmodels,apis --library retrofit2
     swagger_codegen_homebrew_cmd = 'swagger-codegen generate -i ' + param_url + ' -l java -Dmodels,apis --library retrofit2'
     os.system(swagger_codegen_homebrew_cmd)
