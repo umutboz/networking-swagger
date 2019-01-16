@@ -1,3 +1,4 @@
+
 # ScalesAnswersDto
 
 ## Properties
@@ -9,3 +10,6 @@ Name | Type | Description | Notes
 **answersOfIds** | **String** |  |  [optional]
 **answersOfQuestions** | **String** |  |  [optional]
 **createUserId** | **Integer** |  |  [optional]
+
+
+

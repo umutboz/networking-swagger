@@ -1,3 +1,4 @@
+
 # CarePlansDto
 
 ## Properties
@@ -7,3 +8,6 @@ Name | Type | Description | Notes
 **nursingDiagnosis** | **String** |  |  [optional]
 **target** | **String** |  |  [optional]
 **nursingApplications** | **String** |  |  [optional]
+
+
+

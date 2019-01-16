@@ -1,3 +1,4 @@
+
 # ApiRegisterRequestDto
 
 ## Properties
@@ -10,3 +11,6 @@ Name | Type | Description | Notes
 **os** | **String** |  |  [optional]
 **deviceModel** | **String** |  |  [optional]
 **appVersion** | **String** |  |  [optional]
+
+
+

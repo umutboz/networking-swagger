@@ -1,3 +1,4 @@
+
 # CalculatedDiseasesDto
 
 ## Properties
@@ -11,3 +12,6 @@ Name | Type | Description | Notes
 **diseasesId** | **Integer** |  |  [optional]
 **rate** | **Integer** |  |  [optional]
 **diseases** | **String** |  |  [optional]
+
+
+

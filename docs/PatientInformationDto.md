@@ -1,3 +1,4 @@
+
 # PatientInformationDto
 
 ## Properties
@@ -10,7 +11,7 @@ Name | Type | Description | Notes
 **location** | **String** |  |  [optional]
 **age** | **String** |  |  [optional]
 **process** | **String** |  |  [optional]
-**gender** | **String** |  |  [optional]
+**gender** | **byte[]** |  |  [optional]
 **student** | **String** |  |  [optional]
 **clinic** | **String** |  |  [optional]
 **diseases** | **String** |  |  [optional]
@@ -21,3 +22,7 @@ Name | Type | Description | Notes
 **creationTime** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **lastModificationTime** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **operation** | **String** |  |  [optional]
+**ageGroup** | **String** |  |  [optional]
+
+
+

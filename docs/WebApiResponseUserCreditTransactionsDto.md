@@ -1,3 +1,4 @@
+
 # WebApiResponseUserCreditTransactionsDto
 
 ## Properties
@@ -7,3 +8,6 @@ Name | Type | Description | Notes
 **resultMessage** | **String** |  |  [optional]
 **resultCode** | **Integer** |  |  [optional]
 **extraInfo** | **String** |  |  [optional]
+
+
+

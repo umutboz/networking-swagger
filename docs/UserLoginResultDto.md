@@ -1,3 +1,4 @@
+
 # UserLoginResultDto
 
 ## Properties
@@ -13,3 +14,6 @@ Name | Type | Description | Notes
 **facebookUserId** | **String** |  |  [optional]
 **facebookToken** | **String** |  |  [optional]
 **isFacebookUser** | **Boolean** |  |  [optional]
+
+
+

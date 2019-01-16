@@ -1,9 +1,13 @@
+
 # PatientClinicDto
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  |  [optional]
+**id** | **byte[]** |  |  [optional]
 **name** | **String** |  |  [optional]
-**parentId** | **String** |  |  [optional]
+**parentId** | **byte[]** |  |  [optional]
 **childs** | [**List&lt;PatientClinicDto&gt;**](PatientClinicDto.md) |  |  [optional]
+
+
+

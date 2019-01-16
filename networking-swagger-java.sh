@@ -8,6 +8,7 @@ import sys
 import re
 import urllib2
 import ssl
+import shutil
 
 #1.0.0
 #networking-swagger-java -url -package -serviceName -resultJsonKey
@@ -29,6 +30,9 @@ class _CodeLine(object):
     @constant
     def SLASH():
         return "/"
+    @constant
+    def DOT():
+        return "."
 
 class _DevelopmentEnvoirment(object):
 	@constant
@@ -74,10 +78,7 @@ NETWORKNG_SWAGGER_MANAGER_TEMPLATE = "Networking_swaggger_manager_template"
 manager_filename = 'ServiceManager.java'
 manager_file_content = ''
 
-PRESENTER = 'Presenter'
-PRESENTER_TEMPLATE = "Viper_presenter_template"
-presenter_file_content = ''
-presenter_filename = 'Presenter.swift'
+SWAGGER_CLIENT_FILEPATH = 'src/main/java/io/swagger/client/'
 
 
 VIEW = 'View'
@@ -104,6 +105,7 @@ CHILD_MANAGER_GET_FUNC_TEMPLATE = "Networking_swagger_managerclass_request_func_
 CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE = "Networking_swagger_managerclass_request_func_get_no_semicolon_child_inner_template"
 CHILD_MANAGER_POST_FUNC_TEMPLATE = "Networking_swagger_managerclass_request_func_post_child_inner_template"
 CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE = "Networking_swagger_managerclass_request_func_post_no_semicolon_child_inner_template"
+CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE = "Networking_swagger_import_package_inner_template"
 
 TEMPLATE_FOLDER = "template/"
 ONLINE_FOLDER = "https://raw.githubusercontent.com/umutboz/networking-swagger/master/template/"
@@ -120,7 +122,7 @@ SWIFT = ".swift"
 FOR_CHILD_INNER = "//{FOR SUB_IN}"
 FOR_CHILD = "//{FOR SUB}"
 def initVariables():
-    global replacement, NETWORKNG_SWAGGER_MANAGER_TEMPLATE,CHILD_MANAGER_ADD_HEADER_TEMPLATE, CHILD_MANAGER_GET_FUNC_TEMPLATE,CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE,CHILD_MANAGER_POST_FUNC_TEMPLATE, CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE,swagger_root_http_url
+    global replacement, NETWORKNG_SWAGGER_MANAGER_TEMPLATE,CHILD_MANAGER_ADD_HEADER_TEMPLATE, CHILD_MANAGER_GET_FUNC_TEMPLATE,CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE,CHILD_MANAGER_POST_FUNC_TEMPLATE, CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE,CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE,swagger_root_http_url
     online_path = "https://raw.githubusercontent.com/umutboz/networking-swagger/master/template/"
     if intern(DEV_ENV.ONLINE) is intern(CURRENT_DEV_ENV):
         NETWORKNG_SWAGGER_MANAGER_TEMPLATE = ONLINE_FOLDER + NETWORKNG_SWAGGER_MANAGER_TEMPLATE
@@ -129,6 +131,7 @@ def initVariables():
         CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE = ONLINE_FOLDER + CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE
         CHILD_MANAGER_POST_FUNC_TEMPLATE = ONLINE_FOLDER + CHILD_MANAGER_POST_FUNC_TEMPLATE
         CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE = ONLINE_FOLDER + CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE
+        CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE = ONLINE_FOLDER +  CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE
         #CHILD_PROTOCOL_WIREFRAME_MODULE_METHOD_TEMPLATE = ONLINE_FOLDER + CHILD_PROTOCOL_WIREFRAME_MODULE_METHOD_TEMPLATE
         #CHILD_WIFRAME_MODULE_METHOD_INNER_TEMPLATE = ONLINE_FOLDER + CHILD_WIFRAME_MODULE_METHOD_INNER_TEMPLATE
         #CHILD_PRESENTER_TEMPLATE = ONLINE_FOLDER + CHILD_PRESENTER_TEMPLATE
@@ -136,12 +139,13 @@ def initVariables():
         #CHILD_INTERACTOR_PRESENTER_MODULE_FIELD_TEMPLATE = ONLINE_FOLDER + CHILD_INTERACTOR_PRESENTER_MODULE_FIELD_TEMPLATE
 
     else:
-        NETWORKNG_SWAGGER_MANAGER_TEMPLATE = ONLINE_FOLDER + NETWORKNG_SWAGGER_MANAGER_TEMPLATE
-        CHILD_MANAGER_ADD_HEADER_TEMPLATE = ONLINE_FOLDER + CHILD_MANAGER_ADD_HEADER_TEMPLATE
-        CHILD_MANAGER_GET_FUNC_TEMPLATE = ONLINE_FOLDER + CHILD_MANAGER_GET_FUNC_TEMPLATE
-        CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE = ONLINE_FOLDER + CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE
-        CHILD_MANAGER_POST_FUNC_TEMPLATE = ONLINE_FOLDER + CHILD_MANAGER_POST_FUNC_TEMPLATE
-        CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE = ONLINE_FOLDER + CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE
+        NETWORKNG_SWAGGER_MANAGER_TEMPLATE = TEMPLATE_FOLDER + NETWORKNG_SWAGGER_MANAGER_TEMPLATE
+        CHILD_MANAGER_ADD_HEADER_TEMPLATE = TEMPLATE_FOLDER + CHILD_MANAGER_ADD_HEADER_TEMPLATE
+        CHILD_MANAGER_GET_FUNC_TEMPLATE = TEMPLATE_FOLDER + CHILD_MANAGER_GET_FUNC_TEMPLATE
+        CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE = TEMPLATE_FOLDER + CHILD_MANAGER_GET_FUNC_NO_SEMICOLON_TEMPLATE
+        CHILD_MANAGER_POST_FUNC_TEMPLATE = TEMPLATE_FOLDER + CHILD_MANAGER_POST_FUNC_TEMPLATE
+        CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE = TEMPLATE_FOLDER + CHILD_MANAGER_POST_FUNC_NO_SEMICOLON_TEMPLATE
+        CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE = TEMPLATE_FOLDER + CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE
 def createFolder ():
     if not os.path.isdir(root_path):
         os.makedirs(root_path)
@@ -210,6 +214,7 @@ def getFileContent(file):
 		return fileContent
 
 def replaceAndCreateCodingContent(template_file):
+    print template_file
     temp_file_content = multiple_replace(getFileContent(template_file),  child_replacement)
     return temp_file_content
 
@@ -217,7 +222,9 @@ def insertOtherString (source_str, insert_str, pos):
     return source_str[:pos]+insert_str+source_str[pos:]
 
 def childInsertMember(childInnerTemplate,insertingModule, subType):
-    templateDataPath =  os.getcwd() + CODING.SLASH  + MODULES + CODING.SLASH + param_package + CODING.SLASH  + insertingModule + CODING.SLASH  + param_package + insertingModule + SWIFT
+    templateDataPath =  os.getcwd() + JAVA_ANDROID_ROOT_PATH + package_path + CODING.SLASH  + insertingModule
+    print templateDataPath
+
     #TODO REMOVE
     removeChildContent(childInnerTemplate = childInnerTemplate, removingModule = insertingModule)
 
@@ -282,7 +289,39 @@ def createParentModules():
 	createFile(manager_file_path,manager_file_content)
 	#NETWORKING SWAGGER MANAGER operations END
 
+def runSwaggerModelOperations():
+    #print os.getcwd() + CODING.SLASH + SWAGGER_CLIENT_FILEPATH + "model/"
+    oldModelPath = os.getcwd() + CODING.SLASH  + SWAGGER_CLIENT_FILEPATH + "model/"
+    for model in getModels(oldModelPath, param_package + CODING.DOT + MODULES + CODING.DOT  + MODELS):
+        os.rename(oldModelPath + CODING.SLASH + model[0] + JAVA, root_path + CODING.SLASH + MODULES + CODING.SLASH + MODELS + CODING.SLASH + model[0] +  JAVA)
+        #print root_path + CODING.SLASH + MODULES + CODING.SLASH + MODELS + CODING.SLASH + model[0]
+        child_replacement = { "[PACKAGE_NAME]" : param_package , "[MODEL_NAME]" : "models" + CODING.DOT + model[0]}
+        childInsertMember(childInnerTemplate=CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE,insertingModule=manager_filename, subType=1)
 
+    shutil.rmtree(oldModelPath)
+    shutil.rmtree("docs")
+    shutil.rmtree( os.getcwd() + CODING.SLASH + "src/test")
+
+def getModels(path, packageName):
+    subList = os.listdir(path)
+    # line split folde rname
+    replaceModelPackage(path, packageName, subList)
+    listNew = list(map(lambda x:  re.split('.java', x), subList))
+    return listNew
+
+def replaceModelPackage(path, packageName, subList):
+    packageName = 'package '+packageName + '\n'
+    for subItem in subList:
+        with open(path+subItem, "r") as file:
+            lineDatas = file.readlines()
+        # line number
+        index = 0
+        for line in lineDatas:
+            if line.__contains__('package'):
+                lineDatas[index] = packageName
+            index += 1
+        with open(path+subItem, 'w') as file:
+            file.writelines(lineDatas)
 #coding start
 #networking-swagger -url -package -serviceName -resultJsonKey
 if len(sys.argv) >= 4:
@@ -305,13 +344,15 @@ if len(sys.argv) >= 4:
     replacement = { "[SERVICE_NAME]" : param_serviceName ,"[PACKAGE_NAME]" : param_package ,"[URL]" : swagger_root_http_url }
     #creatae networking-swagger-java folders
     createFolder()
-    swagger_codegen_homebrew_cmd = 'swagger-codegen generate -i ' + param_url + ' -l java -Dmodels'
+    #swagger-codegen generate -i http://178.211.54.214:5000/swagger/v1/swagger.json -l java -Dmodels,apis --library retrofit2
+    swagger_codegen_homebrew_cmd = 'swagger-codegen generate -i ' + param_url + ' -l java -Dmodels,apis --library retrofit2'
     os.system(swagger_codegen_homebrew_cmd)
+
     createParentModules()
-    pwd = '/Users/umut/Desktop/Architecture/Android Libraries/networking/networking-swagger/src/main/java/io/swagger/client/model/WebApiResponseUserLoginResultDto.java'
-    if not os.path.exists('/Users/umut/Desktop/Architecture/Android Libraries/networking/networking-swagger/src/main/java/io/swagger/client/model/CarePlansDto.java'):
-        print 'heello from end'
-        showErrorMessages(MESSAGE.ERROR,"heello from end")
+
+    #swagger model replace package and move MODELS
+    runSwaggerModelOperations()
+
 else:
     showErrorMessages(MESSAGE.ERROR,"networking-swagger -url -package -serviceName")
     showErrorMessages(MESSAGE.ERROR,"min 3 arguments in commands")

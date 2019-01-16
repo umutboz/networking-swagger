@@ -1,3 +1,4 @@
+
 # UserCreditTransactionsDto
 
 ## Properties
@@ -9,3 +10,6 @@ Name | Type | Description | Notes
 **transactionDate** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **isInserted** | **Boolean** |  |  [optional]
 **description** | **String** |  |  [optional]
+
+
+

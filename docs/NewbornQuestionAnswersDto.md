@@ -1,3 +1,4 @@
+
 # NewbornQuestionAnswersDto
 
 ## Properties
@@ -12,3 +13,6 @@ Name | Type | Description | Notes
 **createUserId** | **Long** |  |  [optional]
 **patientInformationId** | **Long** |  |  [optional]
 **createDate** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
+
+
+

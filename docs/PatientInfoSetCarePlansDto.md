@@ -1,3 +1,4 @@
+
 # PatientInfoSetCarePlansDto
 
 ## Properties
@@ -8,3 +9,6 @@ Name | Type | Description | Notes
 **carePlansId** | **Integer** |  |  [optional]
 **checkedNurisngApplicationIndex** | **String** |  |  [optional]
 **isInserted** | **Boolean** |  |  [optional]
+
+
+

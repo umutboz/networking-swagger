@@ -1,3 +1,4 @@
+
 # PediatriMainDto
 
 ## Properties
@@ -9,3 +10,6 @@ Name | Type | Description | Notes
 **answers** | **String** |  |  [optional]
 **description** | **String** |  |  [optional]
 **order** | **Integer** |  |  [optional]
+
+
+
