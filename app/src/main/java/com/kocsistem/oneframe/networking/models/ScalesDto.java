@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * ScalesDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T12:09:11.579+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T22:07:52.192+03:00")
 public class ScalesDto {
   @SerializedName("id")
   private Integer id = null;

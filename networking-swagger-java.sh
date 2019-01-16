@@ -10,9 +10,231 @@ import urllib2
 import ssl
 import shutil
 
+
 #1.0.0
 #networking-swagger-java -url -package -serviceName -resultJsonKey
+#retro -parser classes
+class Interval:
+    start = -1
+    end = -1
+    def __init__(self):
+        pass
 
+
+
+apiRegex = re.compile(r'@(POST|GET)\(\"(.*?)\"\)')
+class Api:
+
+    method = None
+    address= None
+
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def parse(raw):
+        api = Api()
+        api.method = re.findall(apiRegex, raw)[0][0]
+        api.address = re.findall(apiRegex, raw)[0][1]
+
+        return api
+
+headerRegex = re.compile(r'@Headers\({\"(.*?)\"}\)')
+class Header:
+
+    name = None
+    value = None
+
+    @classmethod
+    def __init__(self, name, value):
+        self.name = name
+        self.value = value
+
+    @staticmethod
+    def has(raw):
+        return len(re.findall(headerRegex, raw)) > 0
+
+    @staticmethod
+    def parse(raw):
+        headers = []
+        contents = re.findall(headerRegex, raw)[0].split(",")
+
+        for content in contents:
+            splits = content.split(":")
+
+            header = Header(splits[0], splits[1])
+            headers.append(header)
+
+        return headers
+
+
+
+
+parameterRegex = re.compile(
+    r'@retrofit2.http.(Query|Path|Body)\(?\"?(.*?)\"?\)? (.*?) (.*?),? ')
+class Parameter:
+
+    # Represents annotation is query, path or body
+    annotation = None
+
+    # Represents annotations key like @Query("_key_")
+    key = ''
+
+    # Represents parameter name
+    name = None
+
+    # Represents parameter class type
+    clazz = None
+
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def has(raw):
+        return r'@retrofit2' in raw
+
+    @staticmethod
+    def parse(params):
+        parameters = []
+
+        matches = re.findall(parameterRegex, params)
+        for match in matches:
+            parameter = Parameter()
+            parameter.annotation = match[0]
+            parameter.key = match[1] if match[1] is not '' else None
+            parameter.clazz = match[2]
+            parameter.name = match[3]
+
+            parameters.append(parameter)
+
+        return parameters
+
+class Function:
+
+    name = None
+    api = None
+    headers = []
+    response = None
+    parameters = []
+
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def parse(content):
+        raw = ''.join(content).replace("\n", "")
+        if Parameter.has(raw):
+            params = raw[raw.index(r'@retrofit2'):]
+        raw = raw.replace(" ", "")
+
+        function = Function()
+
+        if Header.has(raw):
+            function.headers = Header.parse(raw)
+
+        function.name = re.findall(r'>(.*?)\(', raw)[0]
+        function.api = Api.parse(raw)
+        function.response = re.findall(r'Call<(.*?)>', raw)[0]
+
+        if Parameter.has(raw):
+            function.parameters = Parameter.parse(params)
+
+        return function
+
+    def querypath(self):
+       querypath = "\"" + self.api.address + "\""
+
+       paths = self.pathparameters()
+       if paths is not None:
+           for path in paths:
+               old = "{" + path.key + "}"
+               new = "\" + " + path.name + " + \""
+               querypath = querypath.replace(old, new)
+
+               del old, new
+
+       queries = self.queryparameters()
+       if queries is not None:
+           querypath += " + \"?\" + "
+           for query in queries:
+               querypath += "\"" + query.key + "=\" + " + query.name
+
+       del paths, queries
+
+       return querypath
+
+    def bodyparameter(self):
+        for parameter in self.parameters:
+            if parameter.annotation == "Body":
+                return parameter
+
+        return None
+
+    def pathparameters(self):
+        paths = None
+
+        for parameter in self.parameters:
+            if parameter.annotation == "Path":
+                if paths is None:
+                    paths = []
+
+                paths.append(parameter)
+
+        return paths
+
+    def queryparameters(self):
+        queries = None
+
+        for parameter in self.parameters:
+            if parameter.annotation == "Query":
+                if queries is None:
+                    queries = []
+
+                queries.append(parameter)
+
+        return queries
+
+
+class Clazz:
+    name = None
+    functions = []
+
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def parse(lines):
+        clazz = Clazz()
+
+        intervals = []
+        interval = Interval()
+
+        for index in range(0, len(lines)):
+            line = lines[index]
+            if (line == '   */\n'):
+                interval = Interval()
+                interval.start = index + 1
+                continue
+            if(line.endswith(');\n')):
+                interval.end = index + 1
+                intervals.append(interval)
+
+        del line
+
+        for interval in intervals:
+            content = lines[interval.start: interval.end]
+
+            function = Function.parse(content)
+
+            if clazz.functions is None:
+                clazz.functions = []
+
+            clazz.functions.append(function)
+            del content
+
+        return clazz
+
+#end retro -parser classes
 def constant(f):
     def fset(self, value):
         raise TypeError
@@ -282,7 +504,7 @@ def runSwaggerModelOperations():
         os.rename(oldModelPath + CODING.SLASH + model[0] + JAVA, root_path + CODING.SLASH + MODULES + CODING.SLASH + MODELS + CODING.SLASH + model[0] +  JAVA)
         #print root_path + CODING.SLASH + MODULES + CODING.SLASH + MODELS + CODING.SLASH + model[0]
         child_replacement = { "[PACKAGE_NAME]" : param_package , "[MODEL_NAME]" : "models" + CODING.DOT + model[0]}
-        childInsertMember(childInnerTemplate=CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE,insertingModule=manager_filename, subType=1)
+        childInsertMember(childInnerTemplate=CHILD_MANAGER_IMPORT_PACKAGE_TEMPLATE,insertingModule=manager_filename, subType=0)
 
     shutil.rmtree(oldModelPath)
     shutil.rmtree("docs")
@@ -308,6 +530,33 @@ def replaceModelPackage(path, packageName, subList):
             index += 1
         with open(path+subItem, 'w') as file:
             file.writelines(lineDatas)
+
+def runRetrofitParser():
+    global child_replacement
+    path = os.getcwd() +'/src/main/java/io/swagger/client/api/DiagnosisApi.java'
+
+    with open(path) as fp:
+        lines = fp.readlines()
+
+    clazz = Clazz.parse(lines)
+    for func in clazz.functions:
+        child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() }
+        #GET FUNC
+        if intern(func.api.method) is intern("GET"):
+            childInsertMember(childInnerTemplate=CHILD_MANAGER_GET_FUNC_TEMPLATE,insertingModule=manager_filename, subType=1)
+        #else:
+
+            #print func.name + " " + func.api.method + " " + func.api.address + " " + func.response + " " + func.querypath()
+
+    #print len(clazz.functions)
+    '''
+    public GenericObjectRequest [FUNC_NAME](final NetworkResponseListener<[RESULT_MODEL_NAME], ServiceErrorModel> listener) {
+         return manager.get("[QUERY_PATH]", listener);
+     }
+    '''
+    #print clazz.functions[0].querypath()
+
+    del lines
 #coding start
 #networking-swagger -url -package -serviceName -resultJsonKey
 if len(sys.argv) >= 4:
@@ -335,9 +584,13 @@ if len(sys.argv) >= 4:
     os.system(swagger_codegen_homebrew_cmd)
 
     createParentModules()
-    child_replacement = { "[PACKAGE_NAME]" : param_package , "[MODEL_NAME]" : "models"}
+
     #swagger model replace package and move MODELS
     runSwaggerModelOperations()
+
+    runRetrofitParser()
+
+
 
 else:
     showErrorMessages(MESSAGE.ERROR,"networking-swagger -url -package -serviceName")
