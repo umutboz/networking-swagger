@@ -546,6 +546,9 @@ def replaceModelPackage(path, packageName, subList):
 
             if line.__contains__('@javax.annotation.Generated'):
                 lineDatas[index] = ""
+                
+            if line.__contains__('ApiModelProperty'):
+                lineDatas[index] = ""
 
             index += 1
         with open(path+subItem, 'w') as file:
