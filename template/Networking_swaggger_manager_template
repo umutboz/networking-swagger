@@ -12,7 +12,9 @@ import com.oneframe.android.networking.NetworkManager;
 import com.oneframe.android.networking.NetworkingFactory;
 import com.oneframe.android.networking.listener.NetworkResponseListener;
 import com.oneframe.android.networking.volleywrapper.GenericObjectRequest;
+import com.oneframe.android.networking.model.ErrorModel;
 import java.util.List;
+
 
 //{{model_package}}
 

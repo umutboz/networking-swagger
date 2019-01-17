@@ -546,7 +546,7 @@ def replaceModelPackage(path, packageName, subList):
 
             if line.__contains__('@javax.annotation.Generated'):
                 lineDatas[index] = ""
-                
+
             if line.__contains__('ApiModelProperty'):
                 lineDatas[index] = ""
 
@@ -640,7 +640,7 @@ if len(sys.argv) >= 4:
     root_path = os.getcwd() + JAVA_ANDROID_ROOT_PATH + package_path
 
     #print root_path
-    replacement = { "[SERVICE_NAME]" : param_serviceName ,"[PACKAGE_NAME]" : param_package ,"[URL]" : swagger_root_http_url }
+    replacement = { "[SERVICE_NAME]" : param_serviceName ,"[PACKAGE_NAME]" : param_package + CODING.DOT + MODULES + ";","[URL]" : swagger_root_http_url }
     #creatae networking-swagger-java folders
     createFolder()
 
