@@ -497,14 +497,15 @@ def createSubModule(module, subTemplateFile,subModuleFileName):
 def createParentModules():
 	global manager_filename#,presenter_filename, view_filename,interactor_filename,wireframe_filename
 	#NETWORKING SWAGGER MANAGER operations BEGIN
-	manager_filename = MODULES + CODING.SLASH + manager_filename
+	manager_filename = MODULES + CODING.SLASH + param_serviceName + manager_filename
 	showErrorMessages(MESSAGE.INFO,manager_filename)
 	#model manager replacement
 	manager_file_content =  multiple_replace(getFileContent(NETWORKNG_SWAGGER_MANAGER_TEMPLATE),  replacement)
 	#print manager_file_content
 	#manager file create
 	manager_file_path = root_path + CODING.SLASH + manager_filename
-	#print manager_file_path
+
+	showErrorMessages(MESSAGE.ERROR,manager_file_path)
 	createFile(manager_file_path,manager_file_content)
 	#NETWORKING SWAGGER MANAGER operations END
 
@@ -512,7 +513,7 @@ def runSwaggerModelOperations():
     global child_replacement
     #print os.getcwd() + CODING.SLASH + SWAGGER_CLIENT_FILEPATH + "model/"
     oldModelPath = os.getcwd() + CODING.SLASH  + SWAGGER_CLIENT_FILEPATH + "model/"
-    for model in getModels(oldModelPath, param_package + CODING.DOT + MODULES + CODING.DOT  + MODELS):
+    for model in getModels(oldModelPath, param_package + CODING.DOT + MODULES + CODING.DOT  + MODELS + ";"):
         os.rename(oldModelPath + CODING.SLASH + model[0] + JAVA, root_path + CODING.SLASH + MODULES + CODING.SLASH + MODELS + CODING.SLASH + model[0] +  JAVA)
         #print root_path + CODING.SLASH + MODULES + CODING.SLASH + MODELS + CODING.SLASH + model[0]
         child_replacement = { "[PACKAGE_NAME]" : param_package , "[MODEL_NAME]" : "models" + CODING.DOT + model[0]}
