@@ -540,6 +540,13 @@ def replaceModelPackage(path, packageName, subList):
         for line in lineDatas:
             if line.__contains__('package'):
                 lineDatas[index] = packageName
+
+            if line.__contains__('import io.swagger.annotations.ApiModel'):
+                lineDatas[index] = ""
+
+            if line.__contains__('@javax.annotation.Generated'):
+                lineDatas[index] = ""
+
             index += 1
         with open(path+subItem, 'w') as file:
             file.writelines(lineDatas)
