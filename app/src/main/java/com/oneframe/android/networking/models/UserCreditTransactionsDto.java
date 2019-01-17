@@ -28,7 +28,7 @@ import org.threeten.bp.OffsetDateTime;
 /**
  * UserCreditTransactionsDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-17T03:14:57.423+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-17T03:16:00.002+03:00")
 public class UserCreditTransactionsDto {
   @SerializedName("credit")
   private Double credit = null;

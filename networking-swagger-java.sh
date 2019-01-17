@@ -505,7 +505,7 @@ def createParentModules():
 	#manager file create
 	manager_file_path = root_path + CODING.SLASH + manager_filename
 
-	showErrorMessages(MESSAGE.ERROR,manager_file_path)
+	#showErrorMessages(MESSAGE.ERROR,manager_file_path)
 	createFile(manager_file_path,manager_file_content)
 	#NETWORKING SWAGGER MANAGER operations END
 
