@@ -550,6 +550,10 @@ def replaceModelPackage(path, packageName, subList):
             if line.__contains__('ApiModelProperty'):
                 lineDatas[index] = ""
 
+            if line.__contains__('import io.swagger.client.model'):
+                dotPackageSplit = lineDatas[index].split(".")
+                lineDatas[index] = "import " + param_package + CODING.DOT + MODULES + CODING.DOT + MODELS + CODING.DOT + dotPackageSplit[len(dotPackageSplit)-1]
+
             index += 1
         with open(path+subItem, 'w') as file:
             file.writelines(lineDatas)

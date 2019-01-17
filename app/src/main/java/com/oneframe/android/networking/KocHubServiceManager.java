@@ -5,14 +5,16 @@
 //  Copyright © 2019 OneFrame Mobile - Koçsistem All rights reserved.
 //
 
-package com.oneframe.android;
+package com.oneframe.android.networking;;
 
 import com.oneframe.android.networking.NetworkConfig;
 import com.oneframe.android.networking.NetworkManager;
 import com.oneframe.android.networking.NetworkingFactory;
 import com.oneframe.android.networking.listener.NetworkResponseListener;
 import com.oneframe.android.networking.volleywrapper.GenericObjectRequest;
+import com.oneframe.android.networking.model.ErrorModel;
 import java.util.List;
+
 
 //{{model_package}}
 import com.oneframe.android.networking.models.ScalesDto;
