@@ -2,7 +2,7 @@
     public void test[FUNC_NAME]() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new [SERVICE_NAME]ServiceManager();
+            serviceManager = new [SERVICE_NAME]ServiceManager();
             [REQUEST_MODEL_NAME] model = new [REQUEST_MODEL_NAME]();
             kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<[RESULT_MODEL_NAME], ErrorModel<String>>() {
                         @Override
