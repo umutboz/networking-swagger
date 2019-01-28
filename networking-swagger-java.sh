@@ -672,7 +672,6 @@ def generateNetworkingFunc(Functions):
 #print func.name + " " + func.api.method + " " + func.api.address + " " + func.response + " " + func.querypath()
 #GET FUNC
         if intern(func.api.method) is intern("GET"):
-            #generateApiFuncCount += 1
             if hasInlineParam == True:
                 child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam }
             else:
@@ -680,7 +679,6 @@ def generateNetworkingFunc(Functions):
             childInsertMember(childInnerTemplate=CHILD_MANAGER_GET_FUNC_TEMPLATE,insertingModule=manager_file_path, subType=1)
             generateApiFuncCount = generateApiFuncCount + 1
         elif intern(func.api.method) is intern("POST"):
-            #generateApiFuncCount += 1
             if hasInlineParam == True:
                 child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam , "[REQUEST_MODEL_NAME]" : funcBodyInlineParam}
             else:
@@ -691,7 +689,6 @@ def generateNetworkingFunc(Functions):
 
 def generateUnitTestFunc(Functions):
     global child_replacement,unit_test_file_path
-    generateApiFuncCount  = 0
     for func in Functions:
         #showErrorMessages(MESSAGE.INFO,  func.name + " unit test func generating...")
         hasInlineParam = False
@@ -724,10 +721,7 @@ def generateUnitTestFunc(Functions):
             else:
                 child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[SERVICE_NAME]" : param_serviceName, "[FUNC_PARAM]" : "" }
             childInsertMember(childInnerTemplate=CHILD_UNIT_TEST_GET_FUNC_TEMPLATE,insertingModule=unit_test_file_path, subType=2)
-            #generateApiFuncCount = generateApiFuncCount + 1
-            generateApiFuncCount += 1
         elif intern(func.api.method) is intern("POST"):
-            #generateApiFuncCount += 1
             if hasInlineParam == True:
                 child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam , "[REQUEST_MODEL_NAME]" : funcBodyInlineParam}
             else:
