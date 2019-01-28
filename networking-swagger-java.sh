@@ -543,7 +543,7 @@ def createParentModules():
 
 
 def createUnitTestModule():
-    global unit_test_filename,unit_test_file_content,replacement,child_replacement,unit_test_file_path
+    global unit_test_filename,unit_test_file_content,replacement,child_replacement,unit_test_file_path,NETWORKNG_SWAGGER_UNIT_TEST_TEMPLATE
     if IS_ENABLE_UNIT_TEST_GENERATE == True:
         unit_test_filename = param_serviceName + unit_test_filename
         #showErrorMessages(MESSAGE.INFO,unit_test_filename)

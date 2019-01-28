@@ -15,17 +15,19 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
-import static org.junit.Assert.*;
-
 import [PACKAGE_NAME].networking.[SERVICE_NAME]ServiceManager;
 import com.oneframe.android.networking.NetworkConfig;
 import com.oneframe.android.networking.NetworkingFactory;
 import com.oneframe.android.networking.listener.NetworkResponseListener;
 import com.oneframe.android.networking.model.ErrorModel;
 import com.oneframe.android.networking.model.ResultModel;
+
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
+import static org.junit.Assert.*;
+
+
 
 
 
