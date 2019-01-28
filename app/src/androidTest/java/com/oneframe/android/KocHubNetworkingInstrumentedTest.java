@@ -15,17 +15,19 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
-import static org.junit.Assert.*;
-
 import com.oneframe.android.networking.KocHubServiceManager;
 import com.oneframe.android.networking.NetworkConfig;
 import com.oneframe.android.networking.NetworkingFactory;
 import com.oneframe.android.networking.listener.NetworkResponseListener;
 import com.oneframe.android.networking.model.ErrorModel;
 import com.oneframe.android.networking.model.ResultModel;
+
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
+import static org.junit.Assert.*;
+
+
 
 
 
@@ -106,9 +108,9 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiFsoSetFsoQuestionAnswersPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new KocHubServiceManager();
+            serviceManager = new KocHubServiceManager();
             List<FsoQuestionAnswersDto> model = new List<FsoQuestionAnswersDto>();
-            kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
+            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseBoolean> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -405,9 +407,9 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiPatientSetSelectedPatientCarePlansPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new KocHubServiceManager();
+            serviceManager = new KocHubServiceManager();
             PatientInfoSetCarePlansDto model = new PatientInfoSetCarePlansDto();
-            kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponsePatientInfoSetCarePlansDto, ErrorModel<String>>() {
+            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponsePatientInfoSetCarePlansDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponsePatientInfoSetCarePlansDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -434,9 +436,9 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiPatientSetPatientInformationPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new KocHubServiceManager();
+            serviceManager = new KocHubServiceManager();
             PatientInformationDto model = new PatientInformationDto();
-            kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponsePatientInformationDto, ErrorModel<String>>() {
+            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponsePatientInformationDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponsePatientInformationDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -706,9 +708,9 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiAccountUserRegisterPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new KocHubServiceManager();
+            serviceManager = new KocHubServiceManager();
             UserRegisterDto model = new UserRegisterDto();
-            kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseUserLoginResultDto, ErrorModel<String>>() {
+            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseUserLoginResultDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseUserLoginResultDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -735,9 +737,9 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiAccountLoginPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new KocHubServiceManager();
+            serviceManager = new KocHubServiceManager();
             LoginRequest model = new LoginRequest();
-            kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseUserLoginResultDto, ErrorModel<String>>() {
+            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseUserLoginResultDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseUserLoginResultDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -764,9 +766,9 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiAccountForgotPasswordPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new KocHubServiceManager();
+            serviceManager = new KocHubServiceManager();
             LoginRequest model = new LoginRequest();
-            kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
+            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseBoolean> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -820,9 +822,9 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiUserCreditSetUserCreditTransactionPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new KocHubServiceManager();
+            serviceManager = new KocHubServiceManager();
             UserCreditTransactionsDto model = new UserCreditTransactionsDto();
-            kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseUserCreditTransactionsDto, ErrorModel<String>>() {
+            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseUserCreditTransactionsDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseUserCreditTransactionsDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -930,9 +932,9 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiNewbornSetNewbornQuestionAnswersPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new KocHubServiceManager();
+            serviceManager = new KocHubServiceManager();
             List<NewbornQuestionAnswersDto> model = new List<NewbornQuestionAnswersDto>();
-            kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
+            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseBoolean> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -1067,9 +1069,9 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiSecurityApiRegisterPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new KocHubServiceManager();
+            serviceManager = new KocHubServiceManager();
             ApiRegisterRequestDto model = new ApiRegisterRequestDto();
-            kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseApiRegisterResultDto, ErrorModel<String>>() {
+            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseApiRegisterResultDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseApiRegisterResultDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -1177,9 +1179,9 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiPediatriSetPediatriQuestionAnswersPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new KocHubServiceManager();
+            serviceManager = new KocHubServiceManager();
             List<PediatriQuestionAnswersDto> model = new List<PediatriQuestionAnswersDto>();
-            kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
+            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseBoolean> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
