@@ -340,7 +340,7 @@ sub_module_type = '-s'
 #folders = [WIREFRAME, INTERACTOR, VIEW ,PRESENTER, PROTOCOLS ]
 ##CURRENT_DEV_ENV LOCAL OR ONLINE(Github)
 #CURRENT_DEV_ENV = DEV_ENV.ONLINE
-CURRENT_DEV_ENV = DEV_ENV.LOCAL
+CURRENT_DEV_ENV = DEV_ENV.ONLINE
 SWIFT = ".swift"
 model_package = "//{{model_package}}"
 request_func = "//{{request_func}}"
