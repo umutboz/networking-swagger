@@ -97,7 +97,7 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiFsoSetFsoQuestionAnswersPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new [SERVICE_NAME]ServiceManager();
+            kocHubServiceManager = new KocHubServiceManager();
             List<FsoQuestionAnswersDto> model = new List<FsoQuestionAnswersDto>();
             kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
@@ -116,7 +116,7 @@ public class KocHubNetworkingInstrumentedTest {
             countDownLatch.await();
         }
         catch (Exception ex){
-            Log.e("[SERVICE_NAME]", "exception : " + ex.getMessage());
+            Log.e("KocHub", "exception : " + ex.getMessage());
             countDownLatch.countDown();
 
         }
@@ -396,7 +396,7 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiPatientSetSelectedPatientCarePlansPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new [SERVICE_NAME]ServiceManager();
+            kocHubServiceManager = new KocHubServiceManager();
             PatientInfoSetCarePlansDto model = new PatientInfoSetCarePlansDto();
             kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponsePatientInfoSetCarePlansDto, ErrorModel<String>>() {
                         @Override
@@ -415,7 +415,7 @@ public class KocHubNetworkingInstrumentedTest {
             countDownLatch.await();
         }
         catch (Exception ex){
-            Log.e("[SERVICE_NAME]", "exception : " + ex.getMessage());
+            Log.e("KocHub", "exception : " + ex.getMessage());
             countDownLatch.countDown();
 
         }
@@ -425,7 +425,7 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiPatientSetPatientInformationPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new [SERVICE_NAME]ServiceManager();
+            kocHubServiceManager = new KocHubServiceManager();
             PatientInformationDto model = new PatientInformationDto();
             kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponsePatientInformationDto, ErrorModel<String>>() {
                         @Override
@@ -444,7 +444,7 @@ public class KocHubNetworkingInstrumentedTest {
             countDownLatch.await();
         }
         catch (Exception ex){
-            Log.e("[SERVICE_NAME]", "exception : " + ex.getMessage());
+            Log.e("KocHub", "exception : " + ex.getMessage());
             countDownLatch.countDown();
 
         }
@@ -697,7 +697,7 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiAccountUserRegisterPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new [SERVICE_NAME]ServiceManager();
+            kocHubServiceManager = new KocHubServiceManager();
             UserRegisterDto model = new UserRegisterDto();
             kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseUserLoginResultDto, ErrorModel<String>>() {
                         @Override
@@ -716,7 +716,7 @@ public class KocHubNetworkingInstrumentedTest {
             countDownLatch.await();
         }
         catch (Exception ex){
-            Log.e("[SERVICE_NAME]", "exception : " + ex.getMessage());
+            Log.e("KocHub", "exception : " + ex.getMessage());
             countDownLatch.countDown();
 
         }
@@ -726,7 +726,7 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiAccountLoginPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new [SERVICE_NAME]ServiceManager();
+            kocHubServiceManager = new KocHubServiceManager();
             LoginRequest model = new LoginRequest();
             kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseUserLoginResultDto, ErrorModel<String>>() {
                         @Override
@@ -745,7 +745,7 @@ public class KocHubNetworkingInstrumentedTest {
             countDownLatch.await();
         }
         catch (Exception ex){
-            Log.e("[SERVICE_NAME]", "exception : " + ex.getMessage());
+            Log.e("KocHub", "exception : " + ex.getMessage());
             countDownLatch.countDown();
 
         }
@@ -755,7 +755,7 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiAccountForgotPasswordPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new [SERVICE_NAME]ServiceManager();
+            kocHubServiceManager = new KocHubServiceManager();
             LoginRequest model = new LoginRequest();
             kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
@@ -774,7 +774,7 @@ public class KocHubNetworkingInstrumentedTest {
             countDownLatch.await();
         }
         catch (Exception ex){
-            Log.e("[SERVICE_NAME]", "exception : " + ex.getMessage());
+            Log.e("KocHub", "exception : " + ex.getMessage());
             countDownLatch.countDown();
 
         }
@@ -811,7 +811,7 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiUserCreditSetUserCreditTransactionPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new [SERVICE_NAME]ServiceManager();
+            kocHubServiceManager = new KocHubServiceManager();
             UserCreditTransactionsDto model = new UserCreditTransactionsDto();
             kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseUserCreditTransactionsDto, ErrorModel<String>>() {
                         @Override
@@ -830,7 +830,7 @@ public class KocHubNetworkingInstrumentedTest {
             countDownLatch.await();
         }
         catch (Exception ex){
-            Log.e("[SERVICE_NAME]", "exception : " + ex.getMessage());
+            Log.e("KocHub", "exception : " + ex.getMessage());
             countDownLatch.countDown();
 
         }
@@ -921,7 +921,7 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiNewbornSetNewbornQuestionAnswersPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new [SERVICE_NAME]ServiceManager();
+            kocHubServiceManager = new KocHubServiceManager();
             List<NewbornQuestionAnswersDto> model = new List<NewbornQuestionAnswersDto>();
             kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
@@ -940,7 +940,7 @@ public class KocHubNetworkingInstrumentedTest {
             countDownLatch.await();
         }
         catch (Exception ex){
-            Log.e("[SERVICE_NAME]", "exception : " + ex.getMessage());
+            Log.e("KocHub", "exception : " + ex.getMessage());
             countDownLatch.countDown();
 
         }
@@ -1058,7 +1058,7 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiSecurityApiRegisterPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new [SERVICE_NAME]ServiceManager();
+            kocHubServiceManager = new KocHubServiceManager();
             ApiRegisterRequestDto model = new ApiRegisterRequestDto();
             kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseApiRegisterResultDto, ErrorModel<String>>() {
                         @Override
@@ -1077,7 +1077,7 @@ public class KocHubNetworkingInstrumentedTest {
             countDownLatch.await();
         }
         catch (Exception ex){
-            Log.e("[SERVICE_NAME]", "exception : " + ex.getMessage());
+            Log.e("KocHub", "exception : " + ex.getMessage());
             countDownLatch.countDown();
 
         }
@@ -1168,7 +1168,7 @@ public class KocHubNetworkingInstrumentedTest {
     public void testapiPediatriSetPediatriQuestionAnswersPost() {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
-            kocHubServiceManager = new [SERVICE_NAME]ServiceManager();
+            kocHubServiceManager = new KocHubServiceManager();
             List<PediatriQuestionAnswersDto> model = new List<PediatriQuestionAnswersDto>();
             kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
@@ -1187,7 +1187,7 @@ public class KocHubNetworkingInstrumentedTest {
             countDownLatch.await();
         }
         catch (Exception ex){
-            Log.e("[SERVICE_NAME]", "exception : " + ex.getMessage());
+            Log.e("KocHub", "exception : " + ex.getMessage());
             countDownLatch.countDown();
 
         }

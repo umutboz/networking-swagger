@@ -723,9 +723,9 @@ def generateUnitTestFunc(Functions):
             childInsertMember(childInnerTemplate=CHILD_UNIT_TEST_GET_FUNC_TEMPLATE,insertingModule=unit_test_file_path, subType=2)
         elif intern(func.api.method) is intern("POST"):
             if hasInlineParam == True:
-                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam , "[REQUEST_MODEL_NAME]" : funcBodyInlineParam}
+                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : funcInlineParam , "[REQUEST_MODEL_NAME]" : funcBodyInlineParam, "[SERVICE_NAME]" : param_serviceName}
             else:
-                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : "", "[REQUEST_MODEL_NAME]" : funcBodyInlineParam}
+                child_replacement = { "[FUNC_NAME]" : func.name , "[RESULT_MODEL_NAME]" : func.response, "[QUERY_PATH]" : func.querypath() , "[FUNC_PARAM]" : "", "[REQUEST_MODEL_NAME]" : funcBodyInlineParam, "[SERVICE_NAME]" : param_serviceName}
             childInsertMember(childInnerTemplate=CHILD_UNIT_TEST_POST_FUNC_TEMPLATE,insertingModule=unit_test_file_path, subType=2)
 
 
