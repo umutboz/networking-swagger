@@ -704,7 +704,9 @@ def generateUnitTestFunc(Functions):
                     elif intern(str(param.clazz)) is intern("Integer"):
                         funcInlineParam += "," + "1"
                     elif intern(str(param.clazz)) is intern("Long"):
-                        funcInlineParam += "," + "1"
+                        funcInlineParam += "," + "1L"
+                    elif intern(str(param.clazz)) is intern("Float"):
+                        funcInlineParam += "," + "1F"
                 if param.annotation == "Body":
                     funcBodyInlineParam = param.clazz
             #print param.name + " " + param.clazz + " type : " + param.annotation

@@ -3,7 +3,7 @@
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             serviceManager = new [SERVICE_NAME]ServiceManager();
-            [REQUEST_MODEL_NAME] model = new [REQUEST_MODEL_NAME]();
+            [REQUEST_MODEL_NAME] model = null;
             serviceManager.[FUNC_NAME](model, new NetworkResponseListener<[RESULT_MODEL_NAME], ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<[RESULT_MODEL_NAME]> resultModel) {
