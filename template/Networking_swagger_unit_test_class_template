@@ -1,0 +1,43 @@
+//
+//
+//  Networking-Swagger Code Generate Creater 1.1
+//
+//  Copyright © 2019 OneFrame Mobile - Koçsistem All rights reserved.
+//
+
+package [PACKAGE_NAME];
+
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
+import static org.junit.Assert.*;
+
+//{{model_package}}
+
+
+@RunWith(AndroidJUnit4.class)
+public class [SERVICE_NAME]NetworkingInstrumentedTest {
+
+    Context context;
+    [SERVICE_NAME]ServiceManager serviceManager;
+
+    @Before
+    public void setUp() {
+        context = InstrumentationRegistry.getTargetContext();
+        NetworkingFactory.init(context);
+        NetworkConfig
+                .getInstance()
+                .enableLog(true);
+
+    }
+
+    //{{unit_test_func}}
+}

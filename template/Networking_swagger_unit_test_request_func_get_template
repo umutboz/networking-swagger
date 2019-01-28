@@ -1,0 +1,26 @@
+    @Test
+    public void test[FUNC_NAME]() {
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        try {
+            serviceManager = new [SERVICE_NAME]ServiceManager();
+            serviceManager.[FUNC_NAME](new NetworkResponseListener<[RESULT_MODEL_NAME], ErrorModel<String>>() {
+                @Override
+                public void onSuccess(ResultModel<[RESULT_MODEL_NAME]> resultModel) {
+                    //Log.d("[SERVICE_NAME]", resultModel.getJsonObject().get("resultData").toString());
+                    Log.d("[SERVICE_NAME]", "response : " + resultModel.getJson());
+                    countDownLatch.countDown();
+                }
+
+                @Override
+                public void onError(ErrorModel<ErrorModel<String>> errorModel) {
+                    Log.d("[SERVICE_NAME]", "error : " + errorModel.getErrorModel().getErrorModel());
+                    countDownLatch.countDown();
+                }
+            }[FUNC_PARAM]);
+
+            countDownLatch.await();
+        } catch (Exception ex) {
+            Log.e("[SERVICE_NAME]", "exception : " + ex.getMessage());
+            countDownLatch.countDown();
+        }
+    }

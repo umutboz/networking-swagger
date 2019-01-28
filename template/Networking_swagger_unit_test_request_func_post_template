@@ -1,0 +1,28 @@
+    @Test
+    public void test[FUNC_NAME]() {
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        try {
+            kocHubServiceManager = new [SERVICE_NAME]ServiceManager();
+            [REQUEST_MODEL_NAME] model = new [REQUEST_MODEL_NAME]();
+            kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<[RESULT_MODEL_NAME], ErrorModel<String>>() {
+                        @Override
+                        public void onSuccess(ResultModel<[RESULT_MODEL_NAME]> resultModel) {
+                            //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
+                            Log.d("data", "data : "+ resultModel.getJson());
+                            countDownLatch.countDown();
+                        }
+
+                        @Override
+                        public void onError(ErrorModel<ErrorModel<String>> errorModel) {
+                            Log.e("error", errorModel.getErrorModel().getErrorModel());
+                            countDownLatch.countDown();
+                        }}[FUNC_PARAM]);
+
+            countDownLatch.await();
+        }
+        catch (Exception ex){
+            Log.e("[SERVICE_NAME]", "exception : " + ex.getMessage());
+            countDownLatch.countDown();
+
+        }
+    }
