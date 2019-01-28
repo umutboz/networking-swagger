@@ -4,7 +4,7 @@
         try {
             serviceManager = new [SERVICE_NAME]ServiceManager();
             [REQUEST_MODEL_NAME] model = new [REQUEST_MODEL_NAME]();
-            kocHubServiceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<[RESULT_MODEL_NAME], ErrorModel<String>>() {
+            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<[RESULT_MODEL_NAME], ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<[RESULT_MODEL_NAME]> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
