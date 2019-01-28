@@ -110,7 +110,7 @@ public class KocHubNetworkingInstrumentedTest {
         try {
             serviceManager = new KocHubServiceManager();
             List<FsoQuestionAnswersDto> model = new List<FsoQuestionAnswersDto>();
-            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
+            serviceManager.apiFsoSetFsoQuestionAnswersPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseBoolean> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -409,7 +409,7 @@ public class KocHubNetworkingInstrumentedTest {
         try {
             serviceManager = new KocHubServiceManager();
             PatientInfoSetCarePlansDto model = new PatientInfoSetCarePlansDto();
-            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponsePatientInfoSetCarePlansDto, ErrorModel<String>>() {
+            serviceManager.apiPatientSetSelectedPatientCarePlansPost(model, new NetworkResponseListener<WebApiResponsePatientInfoSetCarePlansDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponsePatientInfoSetCarePlansDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -438,7 +438,7 @@ public class KocHubNetworkingInstrumentedTest {
         try {
             serviceManager = new KocHubServiceManager();
             PatientInformationDto model = new PatientInformationDto();
-            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponsePatientInformationDto, ErrorModel<String>>() {
+            serviceManager.apiPatientSetPatientInformationPost(model, new NetworkResponseListener<WebApiResponsePatientInformationDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponsePatientInformationDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -710,7 +710,7 @@ public class KocHubNetworkingInstrumentedTest {
         try {
             serviceManager = new KocHubServiceManager();
             UserRegisterDto model = new UserRegisterDto();
-            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseUserLoginResultDto, ErrorModel<String>>() {
+            serviceManager.apiAccountUserRegisterPost(model, new NetworkResponseListener<WebApiResponseUserLoginResultDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseUserLoginResultDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -739,7 +739,7 @@ public class KocHubNetworkingInstrumentedTest {
         try {
             serviceManager = new KocHubServiceManager();
             LoginRequest model = new LoginRequest();
-            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseUserLoginResultDto, ErrorModel<String>>() {
+            serviceManager.apiAccountLoginPost(model, new NetworkResponseListener<WebApiResponseUserLoginResultDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseUserLoginResultDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -768,7 +768,7 @@ public class KocHubNetworkingInstrumentedTest {
         try {
             serviceManager = new KocHubServiceManager();
             LoginRequest model = new LoginRequest();
-            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
+            serviceManager.apiAccountForgotPasswordPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseBoolean> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -934,7 +934,7 @@ public class KocHubNetworkingInstrumentedTest {
         try {
             serviceManager = new KocHubServiceManager();
             List<NewbornQuestionAnswersDto> model = new List<NewbornQuestionAnswersDto>();
-            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
+            serviceManager.apiNewbornSetNewbornQuestionAnswersPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseBoolean> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -1071,7 +1071,7 @@ public class KocHubNetworkingInstrumentedTest {
         try {
             serviceManager = new KocHubServiceManager();
             ApiRegisterRequestDto model = new ApiRegisterRequestDto();
-            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseApiRegisterResultDto, ErrorModel<String>>() {
+            serviceManager.apiSecurityApiRegisterPost(model, new NetworkResponseListener<WebApiResponseApiRegisterResultDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseApiRegisterResultDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
@@ -1181,7 +1181,7 @@ public class KocHubNetworkingInstrumentedTest {
         try {
             serviceManager = new KocHubServiceManager();
             List<PediatriQuestionAnswersDto> model = new List<PediatriQuestionAnswersDto>();
-            serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
+            serviceManager.apiPediatriSetPediatriQuestionAnswersPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseBoolean> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
