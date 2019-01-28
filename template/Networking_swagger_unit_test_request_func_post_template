@@ -8,13 +8,13 @@
                         @Override
                         public void onSuccess(ResultModel<[RESULT_MODEL_NAME]> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
-                            Log.d("[SERVICE_NAME]", "FUNC_NAME] response : " + resultModel.getJson());
+                            Log.d("[SERVICE_NAME]", "[FUNC_NAME] response : " + resultModel.getJson());
                             countDownLatch.countDown();
                         }
 
                         @Override
                         public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                            Log.e("error", errorModel.getErrorModel().getErrorModel());
+                            Log.e("[SERVICE_NAME]", "[FUNC_NAME] error : " + errorModel.getErrorModel().getErrorModel());
                             countDownLatch.countDown();
                         }}[FUNC_PARAM]);
 
