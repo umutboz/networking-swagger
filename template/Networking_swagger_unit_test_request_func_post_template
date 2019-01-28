@@ -8,7 +8,7 @@
                         @Override
                         public void onSuccess(ResultModel<[RESULT_MODEL_NAME]> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
-                            Log.d("data", "data : "+ resultModel.getJson());
+                            Log.d("[SERVICE_NAME]", "FUNC_NAME] response : " + resultModel.getJson());
                             countDownLatch.countDown();
                         }
 
