@@ -109,18 +109,18 @@ public class KocHubNetworkingInstrumentedTest {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             serviceManager = new KocHubServiceManager();
-            List<FsoQuestionAnswersDto> model = new List<FsoQuestionAnswersDto>();
+            List<FsoQuestionAnswersDto> model = null;
             serviceManager.apiFsoSetFsoQuestionAnswersPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseBoolean> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
-                            Log.d("data", "data : "+ resultModel.getJson());
+                            Log.d("KocHub", "apiFsoSetFsoQuestionAnswersPost response : " + resultModel.getJson());
                             countDownLatch.countDown();
                         }
 
                         @Override
                         public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                            Log.e("error", errorModel.getErrorModel().getErrorModel());
+                            Log.e("KocHub", "apiFsoSetFsoQuestionAnswersPost error : " + errorModel.getErrorModel().getErrorModel());
                             countDownLatch.countDown();
                         }});
 
@@ -142,13 +142,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListFsoQuestionAnswersDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiFsoGetFsoQuestionAnswersListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiFsoGetFsoQuestionAnswersListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -169,16 +169,16 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListFsoQuestionAnswersDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiFsoGetFsoQuestionAnswersByPatientInformationIdGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiFsoGetFsoQuestionAnswersByPatientInformationIdGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
-            },1);
+            },1L);
 
             countDownLatch.await();
         } catch (Exception ex) {
@@ -196,13 +196,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListFsoMainDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiFsoGetFsoListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiFsoGetFsoListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -223,13 +223,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListFsoAnswersDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiFsoGetFsoAnswersListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiFsoGetFsoAnswersListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -250,13 +250,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListParamsDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiParamsGetParamsOperationsGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiParamsGetParamsOperationsGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -277,13 +277,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListParamsDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiParamsGetParamsInvasiveProcedureGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiParamsGetParamsInvasiveProcedureGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -304,13 +304,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListParamsDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiParamsGetParamsDrugTypeGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiParamsGetParamsDrugTypeGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -331,13 +331,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListParamsDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiParamsGetParamsDiseasesGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiParamsGetParamsDiseasesGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -358,13 +358,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListParamsDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiParamsGetParamsChronicDiseasesGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiParamsGetParamsChronicDiseasesGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -385,13 +385,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseParamsDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiParamsGetEcareDbVersionGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiParamsGetEcareDbVersionGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -408,18 +408,18 @@ public class KocHubNetworkingInstrumentedTest {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             serviceManager = new KocHubServiceManager();
-            PatientInfoSetCarePlansDto model = new PatientInfoSetCarePlansDto();
+            PatientInfoSetCarePlansDto model = null;
             serviceManager.apiPatientSetSelectedPatientCarePlansPost(model, new NetworkResponseListener<WebApiResponsePatientInfoSetCarePlansDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponsePatientInfoSetCarePlansDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
-                            Log.d("data", "data : "+ resultModel.getJson());
+                            Log.d("KocHub", "apiPatientSetSelectedPatientCarePlansPost response : " + resultModel.getJson());
                             countDownLatch.countDown();
                         }
 
                         @Override
                         public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                            Log.e("error", errorModel.getErrorModel().getErrorModel());
+                            Log.e("KocHub", "apiPatientSetSelectedPatientCarePlansPost error : " + errorModel.getErrorModel().getErrorModel());
                             countDownLatch.countDown();
                         }});
 
@@ -437,18 +437,18 @@ public class KocHubNetworkingInstrumentedTest {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             serviceManager = new KocHubServiceManager();
-            PatientInformationDto model = new PatientInformationDto();
+            PatientInformationDto model = null;
             serviceManager.apiPatientSetPatientInformationPost(model, new NetworkResponseListener<WebApiResponsePatientInformationDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponsePatientInformationDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
-                            Log.d("data", "data : "+ resultModel.getJson());
+                            Log.d("KocHub", "apiPatientSetPatientInformationPost response : " + resultModel.getJson());
                             countDownLatch.countDown();
                         }
 
                         @Override
                         public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                            Log.e("error", errorModel.getErrorModel().getErrorModel());
+                            Log.e("KocHub", "apiPatientSetPatientInformationPost error : " + errorModel.getErrorModel().getErrorModel());
                             countDownLatch.countDown();
                         }});
 
@@ -470,13 +470,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListPatientInfoSetCarePlansDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiPatientListPatientInfoSetCarePlansGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiPatientListPatientInfoSetCarePlansGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -497,13 +497,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListPatientClinicDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiPatientListClinicsGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiPatientListClinicsGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -524,13 +524,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponsePatientInfoSetCarePlansDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiPatientGetSelectedPatientCarePlansByIdGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiPatientGetSelectedPatientCarePlansByIdGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             },1,1);
@@ -551,16 +551,16 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListPatientInformationDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiPatientGetPatientInformationListByCreaterGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiPatientGetPatientInformationListByCreaterGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
-            },1);
+            },1L);
 
             countDownLatch.await();
         } catch (Exception ex) {
@@ -578,13 +578,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponsePatientInformationDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiPatientGetPatientInformationByNameGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiPatientGetPatientInformationByNameGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             },"test");
@@ -605,16 +605,16 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponsePatientInformationDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiPatientGetPatientInformationByIdGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiPatientGetPatientInformationByIdGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
-            },1);
+            },1L);
 
             countDownLatch.await();
         } catch (Exception ex) {
@@ -632,13 +632,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListCarePlansDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiDiagnosisGetCarePlansListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiDiagnosisGetCarePlansListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -659,13 +659,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseCarePlansDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiDiagnosisGetCarePlanByIdGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiDiagnosisGetCarePlanByIdGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             },1);
@@ -686,13 +686,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseCarePlansDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiDiagnosisGetCarePlanByDiagnosisNameGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiDiagnosisGetCarePlanByDiagnosisNameGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             },"test");
@@ -709,18 +709,18 @@ public class KocHubNetworkingInstrumentedTest {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             serviceManager = new KocHubServiceManager();
-            UserRegisterDto model = new UserRegisterDto();
+            UserRegisterDto model = null;
             serviceManager.apiAccountUserRegisterPost(model, new NetworkResponseListener<WebApiResponseUserLoginResultDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseUserLoginResultDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
-                            Log.d("data", "data : "+ resultModel.getJson());
+                            Log.d("KocHub", "apiAccountUserRegisterPost response : " + resultModel.getJson());
                             countDownLatch.countDown();
                         }
 
                         @Override
                         public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                            Log.e("error", errorModel.getErrorModel().getErrorModel());
+                            Log.e("KocHub", "apiAccountUserRegisterPost error : " + errorModel.getErrorModel().getErrorModel());
                             countDownLatch.countDown();
                         }});
 
@@ -738,18 +738,18 @@ public class KocHubNetworkingInstrumentedTest {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             serviceManager = new KocHubServiceManager();
-            LoginRequest model = new LoginRequest();
+            LoginRequest model = null;
             serviceManager.apiAccountLoginPost(model, new NetworkResponseListener<WebApiResponseUserLoginResultDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseUserLoginResultDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
-                            Log.d("data", "data : "+ resultModel.getJson());
+                            Log.d("KocHub", "apiAccountLoginPost response : " + resultModel.getJson());
                             countDownLatch.countDown();
                         }
 
                         @Override
                         public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                            Log.e("error", errorModel.getErrorModel().getErrorModel());
+                            Log.e("KocHub", "apiAccountLoginPost error : " + errorModel.getErrorModel().getErrorModel());
                             countDownLatch.countDown();
                         }});
 
@@ -767,18 +767,18 @@ public class KocHubNetworkingInstrumentedTest {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             serviceManager = new KocHubServiceManager();
-            LoginRequest model = new LoginRequest();
+            LoginRequest model = null;
             serviceManager.apiAccountForgotPasswordPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseBoolean> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
-                            Log.d("data", "data : "+ resultModel.getJson());
+                            Log.d("KocHub", "apiAccountForgotPasswordPost response : " + resultModel.getJson());
                             countDownLatch.countDown();
                         }
 
                         @Override
                         public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                            Log.e("error", errorModel.getErrorModel().getErrorModel());
+                            Log.e("KocHub", "apiAccountForgotPasswordPost error : " + errorModel.getErrorModel().getErrorModel());
                             countDownLatch.countDown();
                         }});
 
@@ -800,13 +800,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListCalculatedDiseasesDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiDiseasesGetCalculatedDiseasesGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiDiseasesGetCalculatedDiseasesGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             },1,"test");
@@ -823,18 +823,18 @@ public class KocHubNetworkingInstrumentedTest {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             serviceManager = new KocHubServiceManager();
-            UserCreditTransactionsDto model = new UserCreditTransactionsDto();
+            UserCreditTransactionsDto model = null;
             serviceManager.apiUserCreditSetUserCreditTransactionPost(model, new NetworkResponseListener<WebApiResponseUserCreditTransactionsDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseUserCreditTransactionsDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
-                            Log.d("data", "data : "+ resultModel.getJson());
+                            Log.d("KocHub", "apiUserCreditSetUserCreditTransactionPost response : " + resultModel.getJson());
                             countDownLatch.countDown();
                         }
 
                         @Override
                         public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                            Log.e("error", errorModel.getErrorModel().getErrorModel());
+                            Log.e("KocHub", "apiUserCreditSetUserCreditTransactionPost error : " + errorModel.getErrorModel().getErrorModel());
                             countDownLatch.countDown();
                         }});
 
@@ -856,13 +856,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListUserCreditTransactionsDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiUserCreditListUserCreditTransactionsGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiUserCreditListUserCreditTransactionsGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -883,16 +883,16 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListUserCreditTransactionsDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiUserCreditListUserCreditTransactionsByUserGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiUserCreditListUserCreditTransactionsByUserGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
-            },1);
+            },1L);
 
             countDownLatch.await();
         } catch (Exception ex) {
@@ -910,16 +910,16 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseUserCreditTransactionSummaryDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiUserCreditGetUserCreditTransactionSummaryGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiUserCreditGetUserCreditTransactionSummaryGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
-            },1);
+            },1L);
 
             countDownLatch.await();
         } catch (Exception ex) {
@@ -933,18 +933,18 @@ public class KocHubNetworkingInstrumentedTest {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             serviceManager = new KocHubServiceManager();
-            List<NewbornQuestionAnswersDto> model = new List<NewbornQuestionAnswersDto>();
+            List<NewbornQuestionAnswersDto> model = null;
             serviceManager.apiNewbornSetNewbornQuestionAnswersPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseBoolean> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
-                            Log.d("data", "data : "+ resultModel.getJson());
+                            Log.d("KocHub", "apiNewbornSetNewbornQuestionAnswersPost response : " + resultModel.getJson());
                             countDownLatch.countDown();
                         }
 
                         @Override
                         public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                            Log.e("error", errorModel.getErrorModel().getErrorModel());
+                            Log.e("KocHub", "apiNewbornSetNewbornQuestionAnswersPost error : " + errorModel.getErrorModel().getErrorModel());
                             countDownLatch.countDown();
                         }});
 
@@ -966,13 +966,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListNewbornQuestionAnswersDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiNewbornGetNewbornQuestionAnswersListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiNewbornGetNewbornQuestionAnswersListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -993,16 +993,16 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListNewbornQuestionAnswersDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiNewbornGetNewbornQuestionAnswersByPatientInformationIdGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiNewbornGetNewbornQuestionAnswersByPatientInformationIdGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
-            },1);
+            },1L);
 
             countDownLatch.await();
         } catch (Exception ex) {
@@ -1020,13 +1020,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListNewbornMainDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiNewbornGetNewbornListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiNewbornGetNewbornListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -1047,13 +1047,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListNewbornAnswerDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiNewbornGetNewbornAnswersListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiNewbornGetNewbornAnswersListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -1070,18 +1070,18 @@ public class KocHubNetworkingInstrumentedTest {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             serviceManager = new KocHubServiceManager();
-            ApiRegisterRequestDto model = new ApiRegisterRequestDto();
+            ApiRegisterRequestDto model = null;
             serviceManager.apiSecurityApiRegisterPost(model, new NetworkResponseListener<WebApiResponseApiRegisterResultDto, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseApiRegisterResultDto> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
-                            Log.d("data", "data : "+ resultModel.getJson());
+                            Log.d("KocHub", "apiSecurityApiRegisterPost response : " + resultModel.getJson());
                             countDownLatch.countDown();
                         }
 
                         @Override
                         public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                            Log.e("error", errorModel.getErrorModel().getErrorModel());
+                            Log.e("KocHub", "apiSecurityApiRegisterPost error : " + errorModel.getErrorModel().getErrorModel());
                             countDownLatch.countDown();
                         }});
 
@@ -1103,13 +1103,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListScalesDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiScalesGetScalesListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiScalesGetScalesListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -1130,13 +1130,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListScalesItakiFallDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiScalesGetScalesItakiFallListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiScalesGetScalesItakiFallListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -1157,13 +1157,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListScalesAnswersDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiScalesGetScalesAnswersListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiScalesGetScalesAnswersListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -1180,18 +1180,18 @@ public class KocHubNetworkingInstrumentedTest {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             serviceManager = new KocHubServiceManager();
-            List<PediatriQuestionAnswersDto> model = new List<PediatriQuestionAnswersDto>();
+            List<PediatriQuestionAnswersDto> model = null;
             serviceManager.apiPediatriSetPediatriQuestionAnswersPost(model, new NetworkResponseListener<WebApiResponseBoolean, ErrorModel<String>>() {
                         @Override
                         public void onSuccess(ResultModel<WebApiResponseBoolean> resultModel) {
                             //Log.d("jsonData", resultModel.getJsonObject().get("resultData").toString());
-                            Log.d("data", "data : "+ resultModel.getJson());
+                            Log.d("KocHub", "apiPediatriSetPediatriQuestionAnswersPost response : " + resultModel.getJson());
                             countDownLatch.countDown();
                         }
 
                         @Override
                         public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                            Log.e("error", errorModel.getErrorModel().getErrorModel());
+                            Log.e("KocHub", "apiPediatriSetPediatriQuestionAnswersPost error : " + errorModel.getErrorModel().getErrorModel());
                             countDownLatch.countDown();
                         }});
 
@@ -1213,13 +1213,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListPediatriQuestionAnswersDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiPediatriGetPediatriQuestionAnswersListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiPediatriGetPediatriQuestionAnswersListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -1240,16 +1240,16 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListPediatriQuestionAnswersDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiPediatriGetPediatriQuestionAnswersByPatientInformationIdGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiPediatriGetPediatriQuestionAnswersByPatientInformationIdGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
-            },1);
+            },1L);
 
             countDownLatch.await();
         } catch (Exception ex) {
@@ -1267,13 +1267,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListPediatriMainDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiPediatriGetPediatriListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiPediatriGetPediatriListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
@@ -1294,13 +1294,13 @@ public class KocHubNetworkingInstrumentedTest {
                 @Override
                 public void onSuccess(ResultModel<WebApiResponseListPediatriAnswerDto> resultModel) {
                     //Log.d("KocHub", resultModel.getJsonObject().get("resultData").toString());
-                    Log.d("KocHub", "response : " + resultModel.getJson());
+                    Log.d("KocHub", "apiPediatriGetPediatriAnswersListGet response : " + resultModel.getJson());
                     countDownLatch.countDown();
                 }
 
                 @Override
                 public void onError(ErrorModel<ErrorModel<String>> errorModel) {
-                    Log.d("KocHub", "error : " + errorModel.getErrorModel().getErrorModel());
+                    Log.e("KocHub", "apiPediatriGetPediatriAnswersListGet error : " + errorModel.getErrorModel().getErrorModel());
                     countDownLatch.countDown();
                 }
             });
